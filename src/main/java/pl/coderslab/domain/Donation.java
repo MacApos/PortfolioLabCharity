@@ -26,9 +26,13 @@ public class Donation {
     @NotNull
     private Integer quantity;
 
+    @JoinColumn(nullable = false)
+    @NotNull
     @ManyToMany
     private List<Category> categories = new ArrayList<>();
 
+    @JoinColumn(nullable = false)
+    @NotNull
     @ManyToOne
     private Institution institution;
 
@@ -37,7 +41,7 @@ public class Donation {
     @NotBlank
     private String street;
 
-    @JoinColumn(nullable = false)
+    @Column(nullable = false)
     @NotNull
     @NotBlank
     private String city;
@@ -48,10 +52,14 @@ public class Donation {
     private String zipCode;
 
     @CreationTimestamp
+    @Column(nullable = false)
+    @NotNull
 //    @Column(columnDefinition = "time default current_timestamp")
     private LocalDate pickUpDate;
 
     @CreationTimestamp
+    @Column(nullable = false)
+    @NotNull
 //    @Column(columnDefinition = "time default current_timestamp")
     private LocalTime pickUpTime;
 
