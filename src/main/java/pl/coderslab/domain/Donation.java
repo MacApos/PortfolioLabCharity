@@ -2,6 +2,7 @@ package pl.coderslab.domain;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -52,15 +53,14 @@ public class Donation {
     private String zipCode;
 
     @CreationTimestamp
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     @NotNull
-//    @Column(columnDefinition = "time default current_timestamp")
     private LocalDate pickUpDate;
 
     @CreationTimestamp
     @Column(nullable = false)
     @NotNull
-//    @Column(columnDefinition = "time default current_timestamp")
     private LocalTime pickUpTime;
 
     @Size(min = 3)
