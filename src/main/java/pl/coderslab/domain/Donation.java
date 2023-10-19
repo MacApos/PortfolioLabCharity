@@ -3,6 +3,9 @@ package pl.coderslab.domain;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.coderslab.validator.City;
+import pl.coderslab.validator.Street;
+import pl.coderslab.validator.ZipCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -40,16 +43,19 @@ public class Donation {
     @Column(nullable = false)
     @NotNull
     @NotBlank
+    @Street
     private String street;
 
     @Column(nullable = false)
     @NotNull
     @NotBlank
+    @City
     private String city;
 
     @Column(nullable = false)
     @NotNull
     @NotBlank
+    @ZipCode
     private String zipCode;
 
     @CreationTimestamp

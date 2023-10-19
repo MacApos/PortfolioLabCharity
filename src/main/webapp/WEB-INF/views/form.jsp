@@ -61,16 +61,13 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <%--        <form action="form-confirmation.html" method="post">--%>
-        <form:form modelAttribute="donation" action="/form" method="post">
+        <form:form modelAttribute="donation" method="post">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
 
                 <c:forEach items="${categories}" var="category">
                     <div class="form-group form-group--checkbox">
-                        <form:checkbox path="categories" value="${categories[0]}"/>
-
                         <label>
                             <form:checkbox path="categories" value="${category}"/>
                             <span class="checkbox"></span>
@@ -78,46 +75,6 @@
                         </label>
                     </div>
                 </c:forEach>
-
-
-                    <%--                <div class="form-group ">--%>
-                    <%--                    <form:input path="street" value="${categories[0].name}"/>--%>
-                    <%--                </div>--%>
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input
-                                type="checkbox"
-                                name="categories"
-                                value="clothes-useless"
-                        />
-                        <span class="checkbox"></span>
-                        <span class="description">ubrania, do wyrzucenia</span>
-                    </label>
-                </div>
-
-                    <%--                <div class="form-group form-group--checkbox">--%>
-                    <%--                    <label>--%>
-                    <%--                        <input type="checkbox" name="categories" value="toys"/>--%>
-                    <%--                        <span class="checkbox"></span>--%>
-                    <%--                        <span class="description">zabawki</span>--%>
-                    <%--                    </label>--%>
-                    <%--                </div>--%>
-
-                    <%--                <div class="form-group form-group--checkbox">--%>
-                    <%--                    <label>--%>
-                    <%--                        <input type="checkbox" name="categories" value="books"/>--%>
-                    <%--                        <span class="checkbox"></span>--%>
-                    <%--                        <span class="description">książki</span>--%>
-                    <%--                    </label>--%>
-                    <%--                </div>--%>
-
-                    <%--                <div class="form-group form-group--checkbox">--%>
-                    <%--                    <label>--%>
-                    <%--                        <input type="checkbox" name="categories" value="other"/>--%>
-                    <%--                        <span class="checkbox"></span>--%>
-                    <%--                        <span class="description">inne</span>--%>
-                    <%--                    </label>--%>
-                    <%--                </div>--%>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step">Dalej</button>
@@ -131,7 +88,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <input type="number" name="bags" step="1" min="1"/>
+                        <form:input type="number" path="quantity" step="1" min="1"/>
                     </label>
                 </div>
 
@@ -141,38 +98,25 @@
                 </div>
             </div>
 
-
             <!-- STEP 4 -->
             <div data-step="3">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
 
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="radio" name="organization" value="old"/>
-                        <span class="checkbox radio"></span>
-                        <span class="description">
-                  <div class="title">Fundacja “Bez domu”</div>
+                <c:forEach items="${institutions}" var="institution">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <input type="radio" name="organization" value="old"/>
+                            <form:radiobutton path="institution" value="${institution}"/>
+                            <span class="checkbox radio"></span>
+                            <span class="description">
+                  <div class="title">${institution.name}</div>
                   <div class="subtitle">
-                    Cel i misja: Pomoc dla osób nie posiadających miejsca
-                    zamieszkania
+                          ${institution.description}
                   </div>
                 </span>
-                    </label>
-                </div>
-
-                <div class="form-group form-group--checkbox">
-                    <label>
-                        <input type="radio" name="organization" value="old"/>
-                        <span class="checkbox radio"></span>
-                        <span class="description">
-                  <div class="title">Fundacja “Dla dzieci"</div>
-                  <div class="subtitle">
-                    Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji
-                    życiowej.
-                  </div>
-                </span>
-                    </label>
-                </div>
+                        </label>
+                    </div>
+                </c:forEach>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
@@ -197,7 +141,8 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <input type="text" name="postcode"/>
+                                Kod pocztowy <form:input path="zipCode"/>
+                                <form:errors path="zipCode" element="div" cssClass="errorDiv"/>
                             </label>
                         </div>
 
@@ -226,57 +171,57 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group form-group--buttons">
-                    <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="button" class="btn next-step">Dalej</button>
-                </div>
-            </div>
+<%--                <div class="form-group form-group--buttons">--%>
+<%--                    <button type="button" class="btn prev-step">Wstecz</button>--%>
+<%--                    <button type="button" class="btn next-step">Dalej</button>--%>
+<%--                </div>--%>
+<%--            </div>--%>
 
             <!-- STEP 6 -->
-            <div data-step="5">
-                <h3>Podsumowanie Twojej darowizny</h3>
+<%--            <div data-step="5">--%>
+<%--                <h3>Podsumowanie Twojej darowizny</h3>--%>
 
-                <div class="summary">
-                    <div class="form-section">
-                        <h4>Oddajesz:</h4>
-                        <ul>
-                            <li>
-                                <span class="icon icon-bag"></span>
-                                <span class="summary--text"
-                                >4 worki ubrań w dobrym stanie dla dzieci</span
-                                >
-                            </li>
+<%--                <div class="summary">--%>
+<%--                    <div class="form-section">--%>
+<%--                        <h4>Oddajesz:</h4>--%>
+<%--                        <ul>--%>
+<%--                            <li>--%>
+<%--                                <span class="icon icon-bag"></span>--%>
+<%--                                <span class="summary--text"--%>
+<%--                                >4 worki ubrań w dobrym stanie dla dzieci</span--%>
+<%--                                >--%>
+<%--                            </li>--%>
 
-                            <li>
-                                <span class="icon icon-hand"></span>
-                                <span class="summary--text"
-                                >Dla fundacji "Mam marzenie" w Warszawie</span
-                                >
-                            </li>
-                        </ul>
-                    </div>
+<%--                            <li>--%>
+<%--                                <span class="icon icon-hand"></span>--%>
+<%--                                <span class="summary--text"--%>
+<%--                                >Dla fundacji "Mam marzenie" w Warszawie</span--%>
+<%--                                >--%>
+<%--                            </li>--%>
+<%--                        </ul>--%>
+<%--                    </div>--%>
 
-                    <div class="form-section form-section--columns">
-                        <div class="form-section--column">
-                            <h4>Adres odbioru:</h4>
-                            <ul>
-                                <li>Prosta 51</li>
-                                <li>Warszawa</li>
-                                <li>99-098</li>
-                                <li>123 456 789</li>
-                            </ul>
-                        </div>
+<%--                    <div class="form-section form-section--columns">--%>
+<%--                        <div class="form-section--column">--%>
+<%--                            <h4>Adres odbioru:</h4>--%>
+<%--                            <ul>--%>
+<%--                                <li>Prosta 51</li>--%>
+<%--                                <li>Warszawa</li>--%>
+<%--                                <li>99-098</li>--%>
+<%--                                <li>123 456 789</li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
 
-                        <div class="form-section--column">
-                            <h4>Termin odbioru:</h4>
-                            <ul>
-                                <li>13/12/2018</li>
-                                <li>15:40</li>
-                                <li>Brak uwag</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+<%--                        <div class="form-section--column">--%>
+<%--                            <h4>Termin odbioru:</h4>--%>
+<%--                            <ul>--%>
+<%--                                <li>13/12/2018</li>--%>
+<%--                                <li>15:40</li>--%>
+<%--                                <li>Brak uwag</li>--%>
+<%--                            </ul>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>

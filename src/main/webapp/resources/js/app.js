@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
 
     /**
      * Form Select
@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     }
-
     document.querySelectorAll(".form-group--dropdown select").forEach(el => {
         new FormSelect(el);
     });
@@ -73,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /**
      * Hide elements when clicked on document
      */
-    document.addEventListener("click", function (e) {
+    document.addEventListener("click", function(e) {
         const target = e.target;
         const tagName = target.tagName;
 
@@ -168,21 +167,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     }
-
     const form = document.querySelector(".form--steps");
     if (form !== null) {
         new FormSteps(form);
     }
-
-    const checkboxes = document.querySelectorAll("input[type='checkbox']");
-
-
-    checkboxes.forEach(function (checkbox) {
-        console.log(checkbox)
-        // checkbox.addEventListener("change", function (event) {
-        //     console.log(checkbox.getAttribute("value") + " checked");
-        // })
-    })
-
-
 });
