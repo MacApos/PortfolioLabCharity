@@ -20,7 +20,7 @@ public class StreetValidator implements ConstraintValidator<Street, String> {
                         "|" +
                         "(\\p{Lu}\\p{Ll}+((( )|-)\\p{Lu}\\p{Ll}+)*)" +    //np. Jana Nowaka-Jeziorańskiego
                         " \\d{1,4}(/\\d{1,4})*(\\p{Lu}|\\p{Ll})*( m\\.\\d{1,4})*");   //np. Długa 8/9A m.11
-        Matcher matcher = compiledPattern.matcher(value.replaceAll(" ", ""));
+        Matcher matcher = compiledPattern.matcher(value);
         return matcher.matches();
     }
 }

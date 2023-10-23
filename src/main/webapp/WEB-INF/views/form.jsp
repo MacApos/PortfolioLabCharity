@@ -60,8 +60,7 @@
 
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
-
-        <form:form modelAttribute="donation" method="post">
+        <form:form modelAttribute="donation" method="post" novalidate="validate">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
@@ -69,13 +68,19 @@
                 <c:forEach items="${categories}" var="category">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:checkbox path="categories" value="${category}"/>
+                            <form:checkbox path="categories" value="${category}" id="${category.name}"/>
+                            <form:errors path="categories" element="div" cssClass="errorDiv"/>
                             <span class="checkbox"></span>
                             <span class="description">${category.name}</span>
                         </label>
                     </div>
                 </c:forEach>
 
+                <div class="form-group form-group--checkbox">
+                    <div class="invalid-feedback">
+                        Wybierz przynajmniej jedną kategorię.
+                    </div>
+                </div>
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step">Dalej</button>
                 </div>
@@ -88,8 +93,15 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <form:input type="number" path="quantity" step="1" min="1"/>
+                        <form:input type="number" path="quantity" step="1" min="1" required="true"/>
+                        <form:errors path="quantity" element="div" cssClass="errorDiv"/>
+                        <div class="invalid-feedback">
+                            Podaj co najmniej 1 worek.
+                        </div>
                     </label>
+                    <div class="invalid-feedback">
+                        Podaj co najmniej 1 worek.
+                    </div>
                 </div>
 
                 <div class="form-group form-group--buttons">
@@ -105,19 +117,23 @@
                 <c:forEach items="${institutions}" var="institution">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <input type="radio" name="organization" value="old"/>
-                            <form:radiobutton path="institution" value="${institution}"/>
+                            <form:radiobutton path="institution" value="${institution}" id="${institution.name}"/>
+                            <form:errors path="institution" element="div" cssClass="errorDiv"/>
                             <span class="checkbox radio"></span>
-                            <span class="description">
-                  <div class="title">${institution.name}</div>
-                  <div class="subtitle">
-                          ${institution.description}
-                  </div>
-                </span>
+                            <div class="description">
+                                <div class="title">${institution.name}</div>
+                                <div class="subtitle">
+                                        ${institution.description}
+                                </div>
+                            </div>
                         </label>
                     </div>
                 </c:forEach>
-
+                <div class="form-group form-group--checkbox">
+                    <div class="invalid-feedback">
+                        Wybierz przynajmniej jedną fundację.
+                    </div>
+                </div>
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
                     <button type="button" class="btn next-step">Dalej</button>
@@ -126,29 +142,49 @@
 
             <!-- STEP 5 -->
             <div data-step="4">
+
                 <h3>Podaj adres oraz termin odbioru rzecz przez kuriera:</h3>
 
                 <div class="form-section form-section--columns">
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Ulica <input type="text" name="address"/> </label>
-                        </div>
-
-                        <div class="form-group form-group--inline">
-                            <label> Miasto <input type="text" name="city"/> </label>
-                        </div>
-
-                        <div class="form-group form-group--inline">
                             <label>
-                                Kod pocztowy <form:input path="zipCode"/>
-                                <form:errors path="zipCode" element="div" cssClass="errorDiv"/>
+                                Ulica <form:input path="street" required="true" minlength="2" value="Długa 8/9A m.11"/>
+                                <form:errors path="street" element="div" cssClass="errorDiv"/>
+                                <div class="invalid-feedback">
+                                    Wpisz poprawną nazwę ulicy.
+                                </div>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Numer telefonu <input type="phone" name="phone"/>
+                                Miasto <form:input path="city" required="true" minlength="2" value="Poznań"/>
+                                <form:errors path="city" element="div" cssClass="errorDiv"/>
+                                <div class="invalid-feedback">
+                                    Wpisz poprawną nazwę miasta.
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="form-group form-group--inline">
+                            <label>
+                                Kod pocztowy <form:input path="zipCode" required="true" minlength="6" value="00-001"/>
+                                <form:errors path="zipCode" element="div" cssClass="errorDiv"/>
+                                <div class="invalid-feedback">
+                                    Wpisz poprawny kod pocztowy.
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="form-group form-group--inline">
+                            <label>
+                                Numer telefonu <input type="phone" name="phone" value="123456789"/>
+
+                                <div class="invalid-feedback">
+                                    Wpisz poprawny numer telefonu.
+                                </div>
                             </label>
                         </div>
                     </div>
@@ -156,72 +192,85 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label> Data <input type="date" name="data"/> </label>
-                        </div>
+                            <label>
+                                Data <form:input type="date" path="pickUpDate" required="true" value="10/23/2023"/>
+                                <form:errors path="pickUpDate" element="div" cssClass="errorDiv"/>
+                                <div class="invalid-feedback">
+                                    Podaj datę.
+                                </div>
+                            </label>
 
-                        <div class="form-group form-group--inline">
-                            <label> Godzina <input type="time" name="time"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Uwagi dla kuriera
-                                <textarea name="more_info" rows="5"></textarea>
+                                Godzina <form:input type="time" path="pickUpTime" required="true" value="12:00"/>
+                                <form:errors path="pickUpTime" element="div" cssClass="errorDiv"/>
+                                <div class="invalid-feedback">
+                                    Podaj godzinę.
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="form-group form-group--inline">
+                            <label>
+                                Uwagi dla kuriera <form:textarea path="pickUpComment"/>
+                                <form:errors path="pickUpComment" element="div" cssClass="errorDiv"/>
                             </label>
                         </div>
                     </div>
                 </div>
-<%--                <div class="form-group form-group--buttons">--%>
-<%--                    <button type="button" class="btn prev-step">Wstecz</button>--%>
-<%--                    <button type="button" class="btn next-step">Dalej</button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+                <div class="form-group form-group--buttons">
+                    <button type="button" class="btn prev-step">Wstecz</button>
+                    <button type="button" class="btn next-step">Dalej</button>
+                </div>
+            </div>
 
             <!-- STEP 6 -->
-<%--            <div data-step="5">--%>
-<%--                <h3>Podsumowanie Twojej darowizny</h3>--%>
+            <div data-step="5">
+                <h3>Podsumowanie Twojej darowizny</h3>
 
-<%--                <div class="summary">--%>
-<%--                    <div class="form-section">--%>
-<%--                        <h4>Oddajesz:</h4>--%>
-<%--                        <ul>--%>
-<%--                            <li>--%>
-<%--                                <span class="icon icon-bag"></span>--%>
-<%--                                <span class="summary--text"--%>
-<%--                                >4 worki ubrań w dobrym stanie dla dzieci</span--%>
-<%--                                >--%>
-<%--                            </li>--%>
+                <div class="summary">
+                    <div class="form-section">
+                        <h4>Oddajesz:</h4>
+                        <ul>
+                            <li>
+                                <span class="icon icon-bag"></span>
+                                <span class="summary--text" id="summary1"
+                                >4 worki ubrań w dobrym stanie dla dzieci</span
+                                >
+                            </li>
 
-<%--                            <li>--%>
-<%--                                <span class="icon icon-hand"></span>--%>
-<%--                                <span class="summary--text"--%>
-<%--                                >Dla fundacji "Mam marzenie" w Warszawie</span--%>
-<%--                                >--%>
-<%--                            </li>--%>
-<%--                        </ul>--%>
-<%--                    </div>--%>
+                            <li>
+                                <span class="icon icon-hand"></span>
+                                <span class="summary--text" id="summary2"
+                                >Dla fundacji "Mam marzenie" w Warszawie</span
+                                >
+                            </li>
+                        </ul>
+                    </div>
 
-<%--                    <div class="form-section form-section--columns">--%>
-<%--                        <div class="form-section--column">--%>
-<%--                            <h4>Adres odbioru:</h4>--%>
-<%--                            <ul>--%>
-<%--                                <li>Prosta 51</li>--%>
-<%--                                <li>Warszawa</li>--%>
-<%--                                <li>99-098</li>--%>
-<%--                                <li>123 456 789</li>--%>
-<%--                            </ul>--%>
-<%--                        </div>--%>
+                    <div class="form-section form-section--columns">
+                        <div class="form-section--column">
+                            <h4>Adres odbioru:</h4>
+                            <ul>
+                                <li id="summary3">Prosta 51</li>
+                                <li id="summary4">Warszawa</li>
+                                <li id="summary5">99-098</li>
+                                <li id="summary6">123 456 789</li>
+                            </ul>
+                        </div>
 
-<%--                        <div class="form-section--column">--%>
-<%--                            <h4>Termin odbioru:</h4>--%>
-<%--                            <ul>--%>
-<%--                                <li>13/12/2018</li>--%>
-<%--                                <li>15:40</li>--%>
-<%--                                <li>Brak uwag</li>--%>
-<%--                            </ul>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
+                        <div class="form-section--column">
+                            <h4>Termin odbioru:</h4>
+                            <ul>
+                                <li id="summary7">13/12/2018</li>
+                                <li id="summary8">15:40</li>
+                                <li id="summary9">Brak uwag</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>

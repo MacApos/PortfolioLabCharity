@@ -13,9 +13,9 @@
 
     <ul>
         <li><a href="${pageContext.request.contextPath}/form" class="btn btn--without-border active">Start</a></li>
-        <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
-        <li><a href="#" class="btn btn--without-border">O nas</a></li>
-        <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
-        <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
+        <li><a href="${pageContext.request.contextPath}#steps" class="btn btn--without-border">O co chodzi?</a></li>
+        <li><a href="${pageContext.request.contextPath}#aboutUs" class="btn btn--without-border">O nas</a></li>
+        <li><a href=${pageContext.request.contextPath}"#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
+        <li><a href="${pageContext.request.contextPath}#contact" class="btn btn--without-border">Kontakt</a></li>
     </ul>
 </nav>

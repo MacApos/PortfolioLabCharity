@@ -14,7 +14,7 @@ public class TestRegex {
                         "(\\p{Lu}\\p{Ll}+((( )|-)\\p{Lu}\\p{Ll}+)*)" +    //np. Jana Nowaka-Jeziorańskiego
                         " \\d{1,4}(/\\d{1,4})*(\\p{Lu}|\\p{Ll})*( m\\.\\d{1,4})*");   //np. Długa 8/9A m.11
 
-        String street = "Długa 8/9A m.11";
+        String street = "Poznańska 1";
 
         String formattedStreet = street.replaceAll(" {2,}", " ");
         String[] split = formattedStreet.split(" ");

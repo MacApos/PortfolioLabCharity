@@ -37,16 +37,20 @@ public class DonationController {
     @PostMapping("/form")
     public String addDonation(@Valid Donation donation, BindingResult results, Model model) {
         model.addAttribute("donation", donation);
-        return "form";
+        if(results.hasErrors()){
+            return "form";
+        }
+        donationService.save(donation);
+        return "formConfirmation";
     }
 
     @ModelAttribute("categories")
-    public List<Category> addCategories(){
+    public List<Category> addCategories() {
         return categoryService.findAll();
     }
 
     @ModelAttribute("institutions")
-    public List<Institution> addInstitution(){
+    public List<Institution> addInstitution() {
         return institutionService.findAll();
     }
 }

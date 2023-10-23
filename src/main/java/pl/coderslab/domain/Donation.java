@@ -58,19 +58,15 @@ public class Donation {
     @ZipCode
     private String zipCode;
 
-    @CreationTimestamp
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     @NotNull
     private LocalDate pickUpDate;
 
-    @CreationTimestamp
     @Column(nullable = false)
     @NotNull
     private LocalTime pickUpTime;
 
-    @Size(min = 3)
-    @NotBlank
     private String pickUpComment;
 
     public Long getId() {

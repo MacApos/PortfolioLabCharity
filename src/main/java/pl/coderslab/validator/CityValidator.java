@@ -5,9 +5,9 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CityValidator implements ConstraintValidator<Street, String> {
+public class CityValidator implements ConstraintValidator<City, String> {
     @Override
-    public void initialize(Street constraintAnnotation) {
+    public void initialize(City constraintAnnotation) {
     }
 
     @Override
@@ -16,7 +16,7 @@ public class CityValidator implements ConstraintValidator<Street, String> {
             return true;
         }
         Pattern compiledPattern = Pattern.compile("\\p{Lu}\\p{Ll}+((( )|-)\\p{Lu}\\p{Ll}+)*");
-        Matcher matcher = compiledPattern.matcher(value.replaceAll(" ", ""));
+        Matcher matcher = compiledPattern.matcher(value);
         return matcher.matches();
     }
 }
