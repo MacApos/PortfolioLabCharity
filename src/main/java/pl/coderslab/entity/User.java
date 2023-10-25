@@ -1,6 +1,10 @@
-package pl.coderslab.domain;
+package pl.coderslab.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -10,8 +14,17 @@ public class User {
     private Long id;
 
     @Column(nullable = false, unique = true, length = 60)
+    @NotBlank
+    @Size(min = 3)
     private String username;
 
+    @Column(nullable = false, unique = true, length = 60)
+    @Email
+    private String email;
+
+    @NotNull
+    @NotBlank
+    @Size(min = 3)
     private String password;
 
     private int enabled;
@@ -21,6 +34,14 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String userName) {
+        this.username = userName;
+    }
+
     public Long getId() {
         return id;
     }
@@ -29,12 +50,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String username) {
+        this.email = username;
     }
 
     public String getPassword() {

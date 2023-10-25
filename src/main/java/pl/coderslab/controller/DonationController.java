@@ -4,21 +4,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.domain.Category;
-import pl.coderslab.domain.Donation;
-import pl.coderslab.domain.Institution;
-import pl.coderslab.services.CategoryService;
-import pl.coderslab.services.DonationService;
-import pl.coderslab.services.InstitutionService;
+import pl.coderslab.entity.Category;
+import pl.coderslab.entity.Donation;
+import pl.coderslab.entity.Institution;
+import pl.coderslab.service.CategoryService;
+import pl.coderslab.service.DonationService;
+import pl.coderslab.service.InstitutionService;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Controller
 public class DonationController {
-    CategoryService categoryService;
-    InstitutionService institutionService;
-    DonationService donationService;
+    private final CategoryService categoryService;
+    private final InstitutionService institutionService;
+    private final DonationService donationService;
 
     public DonationController(CategoryService categoryService, InstitutionService institutionService,
                               DonationService donationService) {

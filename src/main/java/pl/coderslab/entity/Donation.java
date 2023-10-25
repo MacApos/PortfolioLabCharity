@@ -1,7 +1,5 @@
-package pl.coderslab.domain;
+package pl.coderslab.entity;
 
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.validator.City;
 import pl.coderslab.validator.Street;
@@ -11,9 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;

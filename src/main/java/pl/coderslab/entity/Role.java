@@ -1,4 +1,4 @@
-package pl.coderslab.domain;
+package pl.coderslab.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

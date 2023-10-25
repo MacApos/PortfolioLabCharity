@@ -1,4 +1,4 @@
-package pl.coderslab;
+package pl.coderslab.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +15,7 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/admin/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .and().formLogin().loginPage("/login")
                 .defaultSuccessUrl("/")

@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="pl">
 <jsp:include page="head.jsp"/>
@@ -13,20 +14,41 @@
 
 <section class="login-page">
     <h2>Zaloguj się</h2>
-    <form>
+    <form:form modelAttribute="user" method="post" novalidate="validate" action="/process-login">
         <div class="form-group">
-            <input type="email" name="email" placeholder="Email" />
+            <form:input path="email" placeholder="Email" cssClass="form-control" required="true"/>
+            <c:if test="${not empty emptyEmail}">
+                <div class="error-div">
+                        ${emptyEmail}
+                </div>
+            </c:if>
+            <c:if test="${not empty emailNotFound}">
+                <div class="error-div">
+                        ${emailNotFound}
+                </div>
+            </c:if>
+            <div class="invalid-feedback">
+                Wpisz adres email.
+            </div>
         </div>
         <div class="form-group">
-            <input type="password" name="password" placeholder="Hasło" />
+            <form:input path="password" type="password" placeholder="Hasło" cssClass="form-control" required="true"/>
+            <c:if test="${not empty wrongPassword}">
+                <div class="error-div">
+                        ${wrongPassword}
+                </div>
+            </c:if>
+            <div class="invalid-feedback">
+                Wpisz hasło.
+            </div>
             <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
 
         <div class="form-group form-group--buttons">
-            <a href="#" class="btn btn--without-border">Załóż konto</a>
+            <a href="${pageContext.request.contextPath}/register" class="btn btn--without-border">Załóż konto</a>
             <button class="btn" type="submit">Zaloguj się</button>
         </div>
-    </form>
+    </form:form>
 </section>
 
 <jsp:include page="footer.jsp"/>

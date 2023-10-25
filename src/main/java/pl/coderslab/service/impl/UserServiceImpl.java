@@ -1,11 +1,12 @@
-package pl.coderslab.services;
+package pl.coderslab.service.impl;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.coderslab.domain.Role;
-import pl.coderslab.domain.User;
+import pl.coderslab.entity.Role;
+import pl.coderslab.entity.User;
 import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.UserRepository;
+import pl.coderslab.service.UserService;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -24,8 +25,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByUserName(String username) {
+    public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override

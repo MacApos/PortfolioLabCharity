@@ -2,18 +2,19 @@ package pl.coderslab.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.domain.Institution;
-import pl.coderslab.services.DonationService;
-import pl.coderslab.services.InstitutionService;
+import pl.coderslab.entity.Institution;
+import pl.coderslab.service.DonationService;
+import pl.coderslab.service.InstitutionService;
 
 import java.util.List;
 
 
 @Controller
 public class HomeController {
-    InstitutionService institutionService;
-    DonationService donationService;
+    private final InstitutionService institutionService;
+    private final DonationService donationService;
 
     public HomeController(InstitutionService institutionService, DonationService donationService) {
         this.institutionService = institutionService;
@@ -30,6 +31,5 @@ public class HomeController {
         model.addAttribute("sumBagsQuantity", sumBagsQuantity);
         return "index";
     }
-
 
 }

@@ -9,7 +9,7 @@
 
 <body>
 <header class="header--form-page">
-    <jsp:include page="headerFormPage.jsp"/>
+    <jsp:include page="headerMainPage.jsp"/>
     <div class="slogan container container--90">
         <div class="slogan--item">
             <h1>
@@ -69,7 +69,7 @@
                     <div class="form-group form-group--checkbox">
                         <label>
                             <form:checkbox path="categories" value="${category}" id="${category.name}"/>
-                            <form:errors path="categories" element="div" cssClass="errorDiv"/>
+                            <form:errors path="categories" element="div" cssClass="error-div"/>
                             <span class="checkbox"></span>
                             <span class="description">${category.name}</span>
                         </label>
@@ -94,7 +94,7 @@
                     <label>
                         Liczba 60l worków:
                         <form:input type="number" path="quantity" step="1" min="1" required="true"/>
-                        <form:errors path="quantity" element="div" cssClass="errorDiv"/>
+                        <form:errors path="quantity" element="div" cssClass="error-div"/>
                         <div class="invalid-feedback">
                             Podaj co najmniej 1 worek.
                         </div>
@@ -118,7 +118,7 @@
                     <div class="form-group form-group--checkbox">
                         <label>
                             <form:radiobutton path="institution" value="${institution}" id="${institution.name}"/>
-                            <form:errors path="institution" element="div" cssClass="errorDiv"/>
+                            <form:errors path="institution" element="div" cssClass="error-div"/>
                             <span class="checkbox radio"></span>
                             <div class="description">
                                 <div class="title">${institution.name}</div>
@@ -151,7 +151,7 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Ulica <form:input path="street" required="true" minlength="2" value="Długa 8/9A m.11"/>
-                                <form:errors path="street" element="div" cssClass="errorDiv"/>
+                                <form:errors path="street" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
                                     Wpisz poprawną nazwę ulicy.
                                 </div>
@@ -161,7 +161,7 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Miasto <form:input path="city" required="true" minlength="2" value="Poznań"/>
-                                <form:errors path="city" element="div" cssClass="errorDiv"/>
+                                <form:errors path="city" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
                                     Wpisz poprawną nazwę miasta.
                                 </div>
@@ -171,7 +171,7 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Kod pocztowy <form:input path="zipCode" required="true" minlength="6" value="00-001"/>
-                                <form:errors path="zipCode" element="div" cssClass="errorDiv"/>
+                                <form:errors path="zipCode" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
                                     Wpisz poprawny kod pocztowy.
                                 </div>
@@ -194,7 +194,7 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Data <form:input type="date" path="pickUpDate" required="true" value="10/23/2023"/>
-                                <form:errors path="pickUpDate" element="div" cssClass="errorDiv"/>
+                                <form:errors path="pickUpDate" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
                                     Podaj datę.
                                 </div>
@@ -205,7 +205,7 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Godzina <form:input type="time" path="pickUpTime" required="true" value="12:00"/>
-                                <form:errors path="pickUpTime" element="div" cssClass="errorDiv"/>
+                                <form:errors path="pickUpTime" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
                                     Podaj godzinę.
                                 </div>
@@ -215,7 +215,7 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Uwagi dla kuriera <form:textarea path="pickUpComment"/>
-                                <form:errors path="pickUpComment" element="div" cssClass="errorDiv"/>
+                                <form:errors path="pickUpComment" element="div" cssClass="error-div"/>
                             </label>
                         </div>
                     </div>
