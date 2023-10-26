@@ -9,14 +9,15 @@
 
 <body>
 <header>
-    <jsp:include page="headerMainPage.jsp"/>
+    <jsp:include page="headerUserPage.jsp"/>
 </header>
 
 <section class="login-page">
     <h2>Zaloguj się</h2>
-    <form:form modelAttribute="user" method="post" novalidate="validate" action="/process-login">
+    <form:form modelAttribute="user" method="post" novalidate="validate">
         <div class="form-group">
-            <form:input path="email" placeholder="Email" cssClass="form-control" required="true"/>
+            <form:input path="email" placeholder="Email" cssClass="form-control" required="true"
+            value="email@gmail.com"/>
             <c:if test="${not empty emptyEmail}">
                 <div class="error-div">
                         ${emptyEmail}
@@ -28,18 +29,19 @@
                 </div>
             </c:if>
             <div class="invalid-feedback">
-                Wpisz adres email.
+                Podaj adres email.
             </div>
         </div>
         <div class="form-group">
-            <form:input path="password" type="password" placeholder="Hasło" cssClass="form-control" required="true"/>
+            <form:input path="password" type="password" placeholder="Hasło" cssClass="form-control" required="true"
+                        value="haslo"/>
             <c:if test="${not empty wrongPassword}">
                 <div class="error-div">
                         ${wrongPassword}
                 </div>
             </c:if>
             <div class="invalid-feedback">
-                Wpisz hasło.
+                Podaj hasło.
             </div>
             <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
@@ -48,7 +50,9 @@
             <a href="${pageContext.request.contextPath}/register" class="btn btn--without-border">Załóż konto</a>
             <button class="btn" type="submit">Zaloguj się</button>
         </div>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form:form>
+
 </section>
 
 <jsp:include page="footer.jsp"/>

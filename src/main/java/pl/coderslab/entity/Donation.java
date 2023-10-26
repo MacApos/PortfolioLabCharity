@@ -64,6 +64,9 @@ public class Donation {
 
     private String pickUpComment;
 
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     public Long getId() {
         return id;
     }
@@ -144,6 +147,14 @@ public class Donation {
         this.pickUpComment = pickUpComment;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Donation{" +
@@ -157,6 +168,7 @@ public class Donation {
                 ", pickUpDate=" + pickUpDate +
                 ", pickUpTime=" + pickUpTime +
                 ", pickUpComment='" + pickUpComment + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

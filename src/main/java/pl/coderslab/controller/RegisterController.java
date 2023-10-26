@@ -27,16 +27,15 @@ public class RegisterController {
     public String showRegisterForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        roleService.saveUserRole();
         return "register";
     }
 
     @PostMapping("/register")
     public String processRegisterForm(@Valid User user, BindingResult result, Model model,
                                       HttpServletRequest request) {
+        //        do walidatora
         model.addAttribute("user", user);
         boolean invalidFeedback = true;
-        ControllerAdvisor.username = user.getUsername();
         String email = user.getEmail();
         String password = user.getPassword();
         String confirmPassword = request.getParameter("password2");
@@ -62,6 +61,7 @@ public class RegisterController {
         if (!invalidFeedback) {
             return "register";
         }
+        roleService.saveUserRole();
         userService.saveUser(user);
         return "redirect:";
     }

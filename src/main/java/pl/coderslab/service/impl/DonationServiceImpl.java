@@ -2,6 +2,7 @@ package pl.coderslab.service.impl;
 
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Donation;
+import pl.coderslab.entity.Status;
 import pl.coderslab.repository.DonationRepository;
 import pl.coderslab.service.DonationService;
 
@@ -26,6 +27,7 @@ public class DonationServiceImpl implements DonationService {
     }
 
     public void save(Donation donation) {
+        donation.setStatus(Status.UNDELIVERED);
         donationRepository.save(donation);
     }
 

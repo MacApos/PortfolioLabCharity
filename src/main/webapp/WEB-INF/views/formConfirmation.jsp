@@ -8,7 +8,7 @@
 
 <body>
 <header class="header--form-page">
-    <jsp:include page="headerMainPage.jsp"/>
+    <jsp:include page="headerUserPage.jsp"/>
     <div class="slogan container container--90">
         <h2>
             Dziękujemy za przesłanie formularza Na maila prześlemy wszelkie

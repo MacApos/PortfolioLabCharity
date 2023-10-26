@@ -1,27 +1,28 @@
 package pl.coderslab.controller;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import pl.coderslab.entity.CurrentUser;
+import pl.coderslab.entity.Role;
 import pl.coderslab.entity.User;
 import pl.coderslab.security.SpringDataUserDetailsService;
+import pl.coderslab.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Stream;
 
 @Controller
 public class LoginController {
     private final SpringDataUserDetailsService springDataUserDetailsService;
+    private final UserService userService;
 
-    public LoginController(SpringDataUserDetailsService springDataUserDetailsService) {
+    public LoginController(SpringDataUserDetailsService springDataUserDetailsService, UserService userService) {
         this.springDataUserDetailsService = springDataUserDetailsService;
+        this.userService = userService;
     }
 
     @GetMapping("/login")
@@ -31,26 +32,14 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/process-login")
-    public String processLoginForm(User user, Model model) {
-        String email = user.getEmail();
-        String password = user.getPassword();
-        if (email == null || email.isBlank()) {
-            model.addAttribute("emptyEmail", "Wpisz adres email.");
-            return "login";
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @GetMapping("/user-page")
+    public String showUserPage(@AuthenticationPrincipal CurrentUser customUser, Model model) {
+        User user = customUser.getUser();
+        model.addAttribute("user", user);
+        if(userService.isAdminLogged(user)){
+            return "redirect:/admin-page";
         }
-        UserDetails userDetails;
-        try {
-            userDetails = springDataUserDetailsService.loadUserByUsername(email);
-        } catch (UsernameNotFoundException e) {
-            model.addAttribute("emailNotFound", "Nie znaleziono konta.");
-            return "login";
-        }
-        if (!BCrypt.checkpw(password, userDetails.getPassword())) {
-            model.addAttribute("wrongPassword", "Niepoprawne hasło.");
-            return "login";
-        }
-        ControllerAdvisor.username = userDetails.getUsername();
-        return "redirect:";
+        return "userPage";
     }
 }

@@ -10,6 +10,8 @@ import pl.coderslab.service.UserService;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,6 +34,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public boolean isAdminLogged(User user) {
+        Set<Role> roles = user.getRoles();
+        Optional<Role> roleAdmin = roles
+                .stream()
+                .filter(role -> role.getName().equals("ROLE_ADMIN"))
+                .findFirst();
+        return roleAdmin.isPresent();
     }
 
     @Override

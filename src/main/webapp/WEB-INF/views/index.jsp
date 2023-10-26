@@ -8,7 +8,7 @@
 
 <body>
 <header class="header--main-page">
-    <jsp:include page="headerMainPage.jsp"/>
+    <jsp:include page="headerUserPage.jsp"/>
     <div class="slogan container container--90">
         <div class="slogan--item">
             <h1>

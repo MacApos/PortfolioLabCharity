@@ -9,7 +9,7 @@
 
 <body>
 <header class="header--form-page">
-    <jsp:include page="headerMainPage.jsp"/>
+    <jsp:include page="headerUserPage.jsp"/>
     <div class="slogan container container--90">
         <div class="slogan--item">
             <h1>
@@ -153,7 +153,7 @@
                                 Ulica <form:input path="street" required="true" minlength="2" value="Długa 8/9A m.11"/>
                                 <form:errors path="street" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
-                                    Wpisz poprawną nazwę ulicy.
+                                    Podaj poprawną nazwę ulicy.
                                 </div>
                             </label>
                         </div>
@@ -163,7 +163,7 @@
                                 Miasto <form:input path="city" required="true" minlength="2" value="Poznań"/>
                                 <form:errors path="city" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
-                                    Wpisz poprawną nazwę miasta.
+                                    Podaj poprawną nazwę miasta.
                                 </div>
                             </label>
                         </div>
@@ -173,7 +173,7 @@
                                 Kod pocztowy <form:input path="zipCode" required="true" minlength="6" value="00-001"/>
                                 <form:errors path="zipCode" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
-                                    Wpisz poprawny kod pocztowy.
+                                    Podaj poprawny kod pocztowy.
                                 </div>
                             </label>
                         </div>
@@ -183,7 +183,7 @@
                                 Numer telefonu <input type="phone" name="phone" value="123456789"/>
 
                                 <div class="invalid-feedback">
-                                    Wpisz poprawny numer telefonu.
+                                    Podaj poprawny numer telefonu.
                                 </div>
                             </label>
                         </div>

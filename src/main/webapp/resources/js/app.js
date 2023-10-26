@@ -284,5 +284,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }, false)
     })
 
+    const loggedUser = document.querySelector(".logged-user");
+    const loggedOutUser = document.querySelector(".logged-out-user");
+    if(loggedUser===null){
+        loggedOutUser.style.display = "flex";
+    } else {
+        loggedOutUser.style.display = "none";
+    }
+
 
 })

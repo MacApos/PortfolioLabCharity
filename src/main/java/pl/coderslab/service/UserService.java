@@ -7,5 +7,6 @@ import pl.coderslab.entity.User;
 public interface UserService {
     User findByUsername(String username);
     User findByEmail(String email);
+    boolean isAdminLogged(User user);
     void saveUser(User user);
 }

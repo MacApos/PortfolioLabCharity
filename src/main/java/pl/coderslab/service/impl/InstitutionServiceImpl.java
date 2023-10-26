@@ -15,8 +15,23 @@ public class InstitutionServiceImpl implements InstitutionService {
         this.institutionRepository = institutionRepository;
     }
 
+    @Override
     public List<Institution> findAll() {
         return institutionRepository.findAll();
     }
 
+    @Override
+    public Institution findById(Long id) {
+        return institutionRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        institutionRepository.deleteById(id);
+    }
+
+    @Override
+    public void save(Institution institution) {
+        institutionRepository.save(institution);
+    }
 }

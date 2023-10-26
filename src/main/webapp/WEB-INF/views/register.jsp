@@ -9,7 +9,7 @@
 
 <body>
 <header>
-    <jsp:include page="headerMainPage.jsp"/>
+    <jsp:include page="headerUserPage.jsp"/>
 </header>
 
 <section class="login-page">
@@ -17,7 +17,7 @@
     <form:form modelAttribute="user" method="post" novalidate="validate" cssClass="register-form">
         <div class="form-group">
             <form:input path="username" placeholder="Nazwa użytkownika" cssClass="form-control"
-                        required="true" minLength="3"/>
+                        required="true" minLength="3" value="User"/>
             <form:errors path="username" element="div" cssClass="error-div"/>
             <c:if test="${not empty usernameExists}">
                 <div class="error-div">
@@ -25,11 +25,12 @@
                 </div>
             </c:if>
             <div class="invalid-feedback">
-                Wpisz poprawną nazwę użytkownika.
+                Podaj poprawną nazwę użytkownika.
             </div>
         </div>
         <div class="form-group">
-            <form:input path="email" placeholder="Email" cssClass="form-control" required="true" minLength="3"/>
+            <form:input path="email" placeholder="Email" cssClass="form-control" required="true" minLength="3"
+                        value="email@gmail.com"/>
             <form:errors path="email" element="div" cssClass="error-div"/>
             <c:if test="${not empty emailExists}">
                 <div class="error-div">
@@ -37,18 +38,19 @@
                 </div>
             </c:if>
             <div class="invalid-feedback">
-                Wpisz poprawny adres email.
+                Podaj poprawny adres email.
             </div>
         </div>
         <div class="form-group">
-            <form:input path="password" type="password" placeholder="Hasło"  required="true" minLength="3"/>
+            <form:input path="password" type="password" placeholder="Hasło"  required="true" minLength="3"
+                        value="haslo"/>
             <form:errors path="password" element="div" cssClass="error-div"/>
             <div class="invalid-feedback">
-                Wpisz poprawne hasło.
+                Podaj poprawne hasło.
             </div>
         </div>
         <div class="form-group">
-            <input type="password" name="password2" required value="${password2}" placeholder="Powtórz hasło"/>
+            <input type="password" name="password2" required placeholder="Powtórz hasło" value="haslo" />
             <c:choose>
                 <c:when test="${not empty differentPasswords}">
                     <div class="invalid-feedback">

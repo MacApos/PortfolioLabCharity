@@ -18,10 +18,10 @@ public class SecurityConfig {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .and().formLogin().loginPage("/login")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/user-page").usernameParameter("email")
                 .and().logout().logoutSuccessUrl("/")
                 .permitAll()
-                .and().exceptionHandling().accessDeniedPage("/403");
+                .and().exceptionHandling().accessDeniedPage("/login");
         return http.build();
     }
 
