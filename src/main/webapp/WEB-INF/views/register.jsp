@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             <form:input path="email" placeholder="Email" cssClass="form-control" required="true" minLength="3"
-                        value="email@gmail.com"/>
+                        value="user@gmail.com"/>
             <form:errors path="email" element="div" cssClass="error-div"/>
             <c:if test="${not empty emailExists}">
                 <div class="error-div">

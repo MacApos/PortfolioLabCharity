@@ -17,7 +17,7 @@
     <form:form modelAttribute="user" method="post" novalidate="validate">
         <div class="form-group">
             <form:input path="email" placeholder="Email" cssClass="form-control" required="true"
-            value="email@gmail.com"/>
+            value="user@gmail.com"/>
             <c:if test="${not empty emptyEmail}">
                 <div class="error-div">
                         ${emptyEmail}

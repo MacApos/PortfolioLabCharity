@@ -1,8 +1,8 @@
 package pl.coderslab.entity;
 
 public enum Status {
-    DELIVERED("delivered"),
-    UNDELIVERED("undelivered");
+    TAKEN("taken"),
+    NOT_TAKEN("notTaken");
     private final String statusName;
 
     Status(String statusName) {

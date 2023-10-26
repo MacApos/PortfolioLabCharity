@@ -11,6 +11,8 @@ import pl.coderslab.entity.User;
 import pl.coderslab.service.DonationService;
 import pl.coderslab.service.InstitutionService;
 
+import java.util.List;
+
 @Controller
 @Secured("ROLE_ADMIN")
 public class DonationController {
@@ -23,8 +25,9 @@ public class DonationController {
     }
 
     @GetMapping("/show-donations")
-    public String showDonations(Donation donation, Model model) {
-
-        return "adminPage";
+    public String showDonations(Model model) {
+        List<Donation> donations = donationService.findAll();
+        model.addAttribute("donations", donations);
+        return "showDonations";
     }
 }

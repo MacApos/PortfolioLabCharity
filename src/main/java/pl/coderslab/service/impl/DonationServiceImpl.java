@@ -1,10 +1,15 @@
 package pl.coderslab.service.impl;
 
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Donation;
 import pl.coderslab.entity.Status;
 import pl.coderslab.repository.DonationRepository;
 import pl.coderslab.service.DonationService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DonationServiceImpl implements DonationService {
@@ -27,8 +32,20 @@ public class DonationServiceImpl implements DonationService {
     }
 
     public void save(Donation donation) {
-        donation.setStatus(Status.UNDELIVERED);
+        donation.setStatus(Status.NOT_TAKEN);
         donationRepository.save(donation);
+    }
+
+    @Override
+    public List<Donation> findAll() {
+        List<Order> orders = new ArrayList<>();
+        Order status = new Order(Sort.Direction.ASC, "status");
+        orders.add(status);
+
+//        Order pickUpDate = new Order(Sort.Direction.ASC, "pick_up_date");
+//        orders.add(pickUpDate);
+
+        return donationRepository.findAll(Sort.by("status","pickUpDate"));
     }
 
 }

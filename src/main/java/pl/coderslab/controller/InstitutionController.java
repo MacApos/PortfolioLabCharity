@@ -30,7 +30,7 @@ public class InstitutionController {
     public String showInstitutions(Model model) {
         List<Institution> institutions = institutionService.findAll();
         model.addAttribute("institutions", institutions);
-        return "showInstitution";
+        return "showInstitutions";
     }
 
     @RequestMapping(value = "/manage-institution")

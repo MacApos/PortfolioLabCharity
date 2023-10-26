@@ -1,5 +1,6 @@
 package pl.coderslab.entity;
 
+import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.validator.City;
 import pl.coderslab.validator.Street;
