@@ -190,6 +190,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 form.querySelector("#summary7").innerText = findInput("pickUpDate");
                 form.querySelector("#summary8").innerText = findInput("pickUpTime");
 
+                console.log(form.querySelector("#summary1").innerText = summary1)
+
+
                 let pickUpComment = findInput("pickUpComment");
                 if (pickUpComment === "") {
                     pickUpComment = "Brak uwag";
@@ -206,7 +209,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function findInput(name) {
-        const form = document.querySelector("form");
+        const form = document.querySelector("form#donationForm");
         const inputs = form.querySelectorAll(`[name='${name}']`);
         const values = []
         Array.from(inputs).forEach(function (input) {

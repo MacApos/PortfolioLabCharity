@@ -17,7 +17,7 @@
     <form:form modelAttribute="user" method="post" novalidate="validate">
         <div class="form-group">
             <form:input path="email" placeholder="Email" cssClass="form-control" required="true"
-            value="user@gmail.com"/>
+            value="u1326546@gmail.com"/>
             <c:if test="${not empty emptyEmail}">
                 <div class="error-div">
                         ${emptyEmail}
@@ -34,7 +34,7 @@
         </div>
         <div class="form-group">
             <form:input path="password" type="password" placeholder="Hasło" cssClass="form-control" required="true"
-                        value="haslo"/>
+                        value="H@slo123"/>
             <c:if test="${not empty wrongPassword}">
                 <div class="error-div">
                         ${wrongPassword}

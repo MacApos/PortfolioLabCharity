@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             <form:input path="email" placeholder="Email" cssClass="form-control" required="true" minLength="3"
-                        value="user@gmail.com"/>
+                        value="u1326546@gmail.com"/>
             <form:errors path="email" element="div" cssClass="error-div"/>
             <c:if test="${not empty emailExists}">
                 <div class="error-div">
@@ -43,14 +43,14 @@
         </div>
         <div class="form-group">
             <form:input path="password" type="password" placeholder="Hasło"  required="true" minLength="3"
-                        value="haslo"/>
+                        value="H@slo123"/>
             <form:errors path="password" element="div" cssClass="error-div"/>
             <div class="invalid-feedback">
                 Podaj poprawne hasło.
             </div>
         </div>
         <div class="form-group">
-            <input type="password" name="password2" required placeholder="Powtórz hasło" value="haslo" />
+            <input type="password" name="password2" required placeholder="Powtórz hasło" value="H@slo123" />
             <c:choose>
                 <c:when test="${not empty differentPasswords}">
                     <div class="invalid-feedback">
