@@ -9,8 +9,13 @@ public interface DonationService {
 
     int sumBagsQuantity();
 
+    List<Donation> findAll();
+
+    Donation findById(Long id);
+
+    void deleteById(Long id);
+
     void save(Donation donation);
 
-    List<Donation> findAll();
 
 }

@@ -17,11 +17,9 @@ import java.util.stream.Stream;
 
 @Controller
 public class LoginController {
-    private final SpringDataUserDetailsService springDataUserDetailsService;
     private final UserService userService;
 
-    public LoginController(SpringDataUserDetailsService springDataUserDetailsService, UserService userService) {
-        this.springDataUserDetailsService = springDataUserDetailsService;
+    public LoginController(UserService userService) {
         this.userService = userService;
     }
 
@@ -37,7 +35,7 @@ public class LoginController {
     public String showUserPage(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         User user = customUser.getUser();
         model.addAttribute("user", user);
-        if(userService.isAdminLogged(user)){
+        if (userService.isAdminLogged(user)) {
             return "redirect:/admin-page";
         }
         return "userPage";

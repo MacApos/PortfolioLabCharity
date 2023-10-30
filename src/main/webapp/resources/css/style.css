@@ -460,21 +460,28 @@ h2:after {
     display: flex;
 }
 
-.text {
-    font-size: 2.2rem;
-    line-height: 2.5em;
+.form-text {
+    font-size: 2rem;
+    line-height: 2em;
     margin-left: 25%;
 }
 
-form .edit-form .form-section--column .form-group  label textarea,
+form .edit-form .form-section--column .form-group label textarea,
 form .edit-form .form-section--column .form-group label input {
-    max-width:400px !important;
-    width: 400px; !important;
+    max-width: 400px !important;
+    width: 400px;
+!important;
+}
+
+.edit-donation--checkbox {
+    font-size: 2rem;
+    line-height: 1em;
 }
 
 .add-institution {
     display: flex;
     justify-content: flex-end;
+    vertical-align: top;
 }
 
 /* line 25, scss/modules/_base.scss */
@@ -1534,7 +1541,7 @@ header nav ul li:last-of-type {
 }
 
 /* line 88, scss/modules/homepage-sections/_help.scss */
-.help--slides-items .col .text {
+.help--slides-items .col .form-text {
     font-family: 'Merriweather', serif;
     font-weight: 300;
     font-style: normal;

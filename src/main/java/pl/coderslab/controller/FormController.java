@@ -54,7 +54,7 @@ public class FormController {
                 .stream()
                 .map(category -> " - " + category.getName())
                 .collect(Collectors.joining(",\n"));
-        emailService.sendEmail(
+        emailService.sendEmailWithAttachment(
                 customUser.getUser().getEmail(),
                 "Potwierdzenie zamówienia odbioru darowizny",
                 String.format("""
@@ -72,7 +72,8 @@ public class FormController {
                                     Uwagi dla kuriera: %s.
                                 """, donation.getInstitution().getName(), categories, donation.getQuantity(),
                         donation.getStreet(), donation.getZipCode(), donation.getCity(),
-                        donation.getPickUpDate(), donation.getPickUpTime(), donation.getPickUpComment()));
+                        donation.getPickUpDate(), donation.getPickUpTime(), donation.getPickUpComment()),
+                "/home/nitro/Documents/JavaProjects/PortfolioLabCharity/src/main/webapp/resources/images/header-bg.jpg");
         return "formConfirmation";
     }
 

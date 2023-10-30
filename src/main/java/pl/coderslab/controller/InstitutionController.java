@@ -56,7 +56,7 @@ public class InstitutionController {
     }
 
     @RequestMapping(value = "/delete-institution")
-    public String deleteInstitution(@RequestParam Long id, Model model) {
+    public String deleteInstitution(@RequestParam Long id) {
         institutionService.deleteById(id);
         return "redirect:show-institutions";
     }

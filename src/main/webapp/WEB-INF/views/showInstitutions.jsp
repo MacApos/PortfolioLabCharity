@@ -16,7 +16,7 @@
             <h2>
                 Lista fundacji:
             </h2>
-            <div class="text">
+            <div class="form-text">
                 <ol>
                     <c:forEach items="${institutions}" var="institution">
                         <li>

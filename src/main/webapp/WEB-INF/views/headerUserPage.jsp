@@ -13,7 +13,6 @@
                 Witaj <sec:authentication property="principal.username"/>
                 <ul class="dropdown">
                     <li><a href="${pageContext.request.contextPath}/show-institutions">Lista fundacji</a></li>
-                    <li><a href="${pageContext.request.contextPath}/show-donations">Lista darowizn</a></li>
                     <li><a href="${pageContext.request.contextPath}/#">Nowe zadanie</a></li>
                     <li>
                         <form action="${pageContext.request.contextPath}/logout" method="post">
@@ -29,6 +28,7 @@
                 Witaj <sec:authentication property="principal.username"/>
                 <ul class="dropdown">
                     <li><a href="${pageContext.request.contextPath}/user-page">Profil</a></li>
+                    <li><a href="${pageContext.request.contextPath}/show-donations">Lista darowizn</a></li>
                     <li><a href="${pageContext.request.contextPath}/user-page#stats">Moje zbiórki</a></li>
                     <li>
                         <form action="${pageContext.request.contextPath}/logout" method="post">

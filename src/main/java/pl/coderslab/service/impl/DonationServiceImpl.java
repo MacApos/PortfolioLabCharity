@@ -1,14 +1,12 @@
 package pl.coderslab.service.impl;
 
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.Donation;
 import pl.coderslab.entity.Status;
 import pl.coderslab.repository.DonationRepository;
 import pl.coderslab.service.DonationService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,10 +17,12 @@ public class DonationServiceImpl implements DonationService {
         this.donationRepository = donationRepository;
     }
 
+    @Override
     public int count() {
         return (int) donationRepository.count();
     }
 
+    @Override
     public int sumBagsQuantity() {
         Integer sumBagsQuantity = donationRepository.sumBagsQuantity();
         if (sumBagsQuantity == null) {
@@ -31,6 +31,7 @@ public class DonationServiceImpl implements DonationService {
         return sumBagsQuantity;
     }
 
+    @Override
     public void save(Donation donation) {
         donation.setStatus(Status.NOT_TAKEN);
         donationRepository.save(donation);
@@ -38,14 +39,19 @@ public class DonationServiceImpl implements DonationService {
 
     @Override
     public List<Donation> findAll() {
-        List<Order> orders = new ArrayList<>();
-        Order status = new Order(Sort.Direction.ASC, "status");
-        orders.add(status);
-
-//        Order pickUpDate = new Order(Sort.Direction.ASC, "pick_up_date");
-//        orders.add(pickUpDate);
-
-        return donationRepository.findAll(Sort.by("status","pickUpDate"));
+        Sort sort = Sort.by("status").descending();
+        sort = sort.and(Sort.by("pickUpDate").ascending());
+        sort = sort.and(Sort.by("OrderDate").ascending());
+        return donationRepository.findAll(sort);
     }
 
+    @Override
+    public Donation findById(Long id) {
+        return donationRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        donationRepository.deleteById(id);
+    }
 }

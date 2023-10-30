@@ -190,9 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 form.querySelector("#summary7").innerText = findInput("pickUpDate");
                 form.querySelector("#summary8").innerText = findInput("pickUpTime");
 
-                console.log(form.querySelector("#summary1").innerText = summary1)
-
-
                 let pickUpComment = findInput("pickUpComment");
                 if (pickUpComment === "") {
                     pickUpComment = "Brak uwag";
@@ -207,6 +204,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (form !== null) {
         new FormSteps(form);
     }
+
+    validateAllForms();
+    validRegistrationForm();
+    showNavigationBar();
 
     function findInput(name) {
         const form = document.querySelector("form#donationForm");
@@ -256,44 +257,100 @@ document.addEventListener("DOMContentLoaded", function () {
         return inputValid;
     }
 
-    const registerForm = document.querySelector(".register-form");
+    function validRegistrationForm() {
+        const registerForm = document.querySelector(".register-form");
+        if (registerForm !== null) {
+            registerForm.addEventListener("submit", function (event) {
+                const password = this.querySelector("input[name='password']");
+                const confirmPassword = this.querySelector("input[name='password2']");
+                const invalidFeedback = confirmPassword.parentElement.querySelector(".invalid-feedback");
+                // const invalidFeedback = findRelatedElement(confirmPassword, "invalid-feedback");
+                const innerText = invalidFeedback.innerText;
+                if ((password.value !== "" && confirmPassword.value !== "") &&
+                    password.value !== confirmPassword.value) {
+                    confirmPassword.setCustomValidity("invalid");
+                    invalidFeedback.innerText = "Hasła nie są takie same."
+                } else {
+                    confirmPassword.setCustomValidity("");
+                    invalidFeedback.innerText = innerText;
+                }
+            })
+            console.log(registerForm.checkValidity());
+        }
+    }
 
-    if (registerForm !== null) {
-        registerForm.addEventListener("submit", function (event) {
-            const password = this.querySelector("input[name='password']");
-            const confirmPassword = this.querySelector("input[name='password2']");
-            const invalidFeedback = confirmPassword.parentElement.querySelector(".invalid-feedback");
-            const innerText = invalidFeedback.innerText;
-            if ((password.value !== "" && confirmPassword.value !== "") &&
-                password.value !== confirmPassword.value) {
-                confirmPassword.setCustomValidity("invalid");
-                invalidFeedback.innerText = "Hasła nie są takie same."
-            } else {
-                confirmPassword.setCustomValidity("");
-                invalidFeedback.innerText = innerText;
-            }
+    function validateAllForms() {
+        const forms = document.querySelectorAll("form");
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (form.querySelector("input[type='checkbox']") !== null) {
+                    setFeedbackForSelectableInputs(form, "checkbox");
+                }
+                if (form.querySelector("input[type='radio']") !== null) {
+                    setFeedbackForSelectableInputs(form, "radio");
+                }
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated')
+            }, false)
         })
     }
-    const forms = document.querySelectorAll("form");
 
-    Array.from(forms).forEach(form => {
-        form.addEventListener('submit', event => {
-            if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-            }
-
-            form.classList.add('was-validated')
-        }, false)
-    })
-
-    const loggedUser = document.querySelector(".logged-user");
-    const loggedOutUser = document.querySelector(".logged-out-user");
-    if(loggedUser===null){
-        loggedOutUser.style.display = "flex";
-    } else {
-        loggedOutUser.style.display = "none";
+    function findNthParent(childElement, generation) {
+        let parent = childElement
+        for (let i = 1; i <= generation; i++) {
+            parent = parent.parentElement;
+        }
+        return parent;
     }
 
+    function findRelatedElement(baseElement, targetElementClass) {
+        const body = document.querySelector("body");
 
+        let parent = baseElement;
+        let targetElement = null;
+
+        while (targetElement === null || parent === body) {
+            parent = parent.parentElement;
+            targetElement = parent.querySelector(`.${targetElementClass}`);
+        }
+        return targetElement
+    }
+
+    function setFeedbackForSelectableInputs(form, inputType) {
+        const selectableInputs = form.querySelectorAll(`input[type='${inputType}']`);
+        const firstInput = selectableInputs[0];
+        const invalidFeedback = findRelatedElement(firstInput, "invalid-feedback");
+        if (invalidFeedback === null) {
+            return;
+        }
+
+        let inputValid = false;
+        for (let i = 0; i < selectableInputs.length; i++) {
+            const input = selectableInputs[i];
+            invalidFeedback.classList.add("is-invalid");
+            if (input.checked) {
+                invalidFeedback.classList.remove("is-invalid");
+                inputValid = true;
+                break;
+            }
+        }
+        if (inputValid) {
+            firstInput.setCustomValidity("");
+        } else {
+            firstInput.setCustomValidity("invalid");
+        }
+    }
+
+    function showNavigationBar() {
+        const loggedUser = document.querySelector(".logged-user");
+        const loggedOutUser = document.querySelector(".logged-out-user");
+        if (loggedUser === null) {
+            loggedOutUser.style.display = "flex";
+        } else {
+            loggedOutUser.style.display = "none";
+        }
+    }
 })

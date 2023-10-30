@@ -16,7 +16,7 @@
     <h2>Zaloguj się</h2>
     <form:form modelAttribute="user" method="post" novalidate="validate">
         <div class="form-group">
-            <form:input path="email" placeholder="Email" cssClass="form-control" required="true"
+            <form:input path="email" placeholder="Email" cssClass="form-control" required="true" minLength="3"
             value="u1326546@gmail.com"/>
             <c:if test="${not empty emptyEmail}">
                 <div class="error-div">
@@ -43,7 +43,7 @@
             <div class="invalid-feedback">
                 Podaj hasło.
             </div>
-            <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
+            <a href="${pageContext.request.contextPath}/password-reset" class="btn btn--small btn--without-border password-reset">Przypomnij hasło</a>
         </div>
 
         <div class="form-group form-group--buttons">

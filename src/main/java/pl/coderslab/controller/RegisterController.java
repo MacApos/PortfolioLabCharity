@@ -3,14 +3,15 @@ package pl.coderslab.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.entity.User;
 import pl.coderslab.service.RoleService;
 import pl.coderslab.service.UserService;
+import pl.coderslab.validator.groups.Registration;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 @Controller
 public class RegisterController {
@@ -31,7 +32,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String processRegisterForm(@Valid User user, BindingResult result, Model model,
+    public String processRegisterForm(@Validated({Registration.class}) User user, BindingResult result, Model model,
                                       HttpServletRequest request) {
         //        do walidatora
         model.addAttribute("user", user);

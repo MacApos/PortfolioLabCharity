@@ -1,6 +1,6 @@
 package pl.coderslab.validator;
 
-import pl.coderslab.validator.impl.CityValidator;
+import pl.coderslab.validator.impl.EmailAlreadyExistsValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -9,11 +9,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = CityValidator.class)
+@Constraint(validatedBy = EmailAlreadyExistsValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface City {
-    String message() default "Insert valid city name.";
+public @interface EmailAlreadyExists {
+    String message() default "Adres email już istnieje.";
 
     Class<?>[] groups() default {};
 

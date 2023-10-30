@@ -1,4 +1,4 @@
-package pl.coderslab.validator;
+package pl.coderslab.validator.impl;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;

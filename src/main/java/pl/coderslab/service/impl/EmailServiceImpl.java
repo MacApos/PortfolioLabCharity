@@ -38,7 +38,6 @@ public class EmailServiceImpl implements EmailService {
     public void sendEmailWithAttachment(String to, String subject, String body, String attachment) {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper;
-
         try {
             helper = new MimeMessageHelper(message, true);
             helper.setFrom("u1326546@gmail.com");
@@ -47,6 +46,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setText(body);
             FileSystemResource file = new FileSystemResource(new File(attachment));
             helper.addAttachment(String.format("%s", file.getFilename()), file);
+            emailSender.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException(e.getMessage());
         }

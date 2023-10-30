@@ -4,24 +4,31 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import pl.coderslab.entity.CurrentUser;
-import pl.coderslab.entity.Donation;
-import pl.coderslab.entity.User;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import pl.coderslab.entity.*;
+import pl.coderslab.service.CategoryService;
 import pl.coderslab.service.DonationService;
 import pl.coderslab.service.InstitutionService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@Secured("ROLE_ADMIN")
+@Secured({"ROLE_USER", "ROLE_ADMIN"})
 public class DonationController {
-    private final InstitutionService institutionService;
     private final DonationService donationService;
+    private final CategoryService categoryService;
+    private final InstitutionService institutionService;
 
-    public DonationController(InstitutionService institutionService, DonationService donationService) {
-        this.institutionService = institutionService;
+    public DonationController(DonationService donationService, CategoryService categoryService,
+                              InstitutionService institutionService) {
         this.donationService = donationService;
+        this.categoryService = categoryService;
+        this.institutionService = institutionService;
     }
 
     @GetMapping("/show-donations")
@@ -29,5 +36,44 @@ public class DonationController {
         List<Donation> donations = donationService.findAll();
         model.addAttribute("donations", donations);
         return "showDonations";
+    }
+
+    @RequestMapping("/donation-details")
+    public String showDonationDetails(@RequestParam(required = false) Long id, Model model) {
+        Donation donation = donationService.findById(id);
+        model.addAttribute("donation", donation);
+        return "donationDetails";
+    }
+
+    @RequestMapping(value = "/manage-donation")
+    public String showDonationForm(@RequestParam(required = false) Long id, Model model) {
+        List<Category> categories = categoryService.findAll();
+        List<Institution> institutions = institutionService.findAll();
+        Donation donation;
+        if (id == null) {
+            donation = new Donation();
+        } else {
+            donation = donationService.findById(id);
+        }
+        model.addAttribute("donation", donation);
+        model.addAttribute("categories", categories);
+        model.addAttribute("institutions", institutions);
+        return "manageDonation";
+    }
+
+    @PostMapping("/manage-donation")
+    public String processDonationForm(@Valid Donation donation, BindingResult result, Model model) {
+        model.addAttribute("donation", donation);
+        if (result.hasErrors()) {
+            return "manageDonation";
+        }
+        donationService.save(donation);
+        return "redirect:show-donations";
+    }
+
+    @RequestMapping(value = "/delete-donation")
+    public String deleteDonation(@RequestParam Long id) {
+        donationService.deleteById(id);
+        return "redirect:show-donations";
     }
 }

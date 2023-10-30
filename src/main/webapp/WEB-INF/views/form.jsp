@@ -69,14 +69,13 @@
                     <div class="form-group form-group--checkbox">
                         <label>
                             <form:checkbox path="categories" value="${category}" id="${category.name}"/>
-                            <form:errors path="categories" element="div" cssClass="error-div"/>
                             <span class="checkbox"></span>
                             <span class="description">${category.name}</span>
                         </label>
                     </div>
                 </c:forEach>
-
                 <div class="form-group form-group--checkbox">
+                    <form:errors path="categories" element="div" cssClass="error-div"/>
                     <div class="invalid-feedback">
                         Wybierz przynajmniej jedną kategorię.
                     </div>
@@ -117,18 +116,17 @@
                 <c:forEach items="${institutions}" var="institution">
                     <div class="form-group form-group--checkbox">
                         <label>
-                            <form:radiobutton path="institution" value="${institution}" id="${institution.name}"/>
-                            <form:errors path="institution" element="div" cssClass="error-div"/>
+                            <form:radiobutton path="institution" value="${institution}"
+                                              id="${institution.name}"/>
                             <span class="checkbox radio"></span>
                             <div class="description">
                                 <div class="title">${institution.name}</div>
-                                <div class="subtitle">
-                                        ${institution.description}
-                                </div>
+                                <div class="subtitle">${institution.description}</div>
                             </div>
                         </label>
                     </div>
                 </c:forEach>
+                <form:errors path="institution" element="div" cssClass="error-div"/>
                 <div class="form-group form-group--checkbox">
                     <div class="invalid-feedback">
                         Wybierz przynajmniej jedną fundację.
@@ -150,7 +148,7 @@
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
                             <label>
-                                Ulica <form:input path="street" required="true" minlength="2" value="Długa 8/9A m.11"/>
+                                Ulica <form:input path="street" required="true" minlength="3" value="Długa 8/9A m.11"/>
                                 <form:errors path="street" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
                                     Podaj poprawną nazwę ulicy.
@@ -160,7 +158,7 @@
 
                         <div class="form-group form-group--inline">
                             <label>
-                                Miasto <form:input path="city" required="true" minlength="2" value="Poznań"/>
+                                Miasto <form:input path="city" required="true" minlength="3" value="Poznań"/>
                                 <form:errors path="city" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
                                     Podaj poprawną nazwę miasta.
@@ -232,7 +230,7 @@
 
                 <div class="summary">
                     <div class="form-section">
-                        <h4>Oddajesz:</h4>
+                        <h4>Przekazywane rzeczy:</h4>
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>

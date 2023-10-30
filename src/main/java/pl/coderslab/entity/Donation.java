@@ -1,6 +1,6 @@
 package pl.coderslab.entity;
 
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.validator.City;
 import pl.coderslab.validator.Street;
@@ -28,12 +28,12 @@ public class Donation {
 
     @JoinColumn(nullable = false)
     @NotNull
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Category> categories = new ArrayList<>();
 
     @JoinColumn(nullable = false)
     @NotNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Institution institution;
 
     @Column(nullable = false)
@@ -65,7 +65,11 @@ public class Donation {
 
     private String pickUpComment;
 
-    @Enumerated(EnumType.STRING)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @UpdateTimestamp
+    private LocalDate orderDate;
+
+    @Enumerated(EnumType.ORDINAL)
     private Status status;
 
     public Long getId() {
@@ -156,6 +160,14 @@ public class Donation {
         this.status = status;
     }
 
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDate OrderDate) {
+        this.orderDate = OrderDate;
+    }
+
     @Override
     public String toString() {
         return "Donation{" +
@@ -169,6 +181,7 @@ public class Donation {
                 ", pickUpDate=" + pickUpDate +
                 ", pickUpTime=" + pickUpTime +
                 ", pickUpComment='" + pickUpComment + '\'' +
+                ", OrderDate=" + orderDate +
                 ", status=" + status +
                 '}';
     }

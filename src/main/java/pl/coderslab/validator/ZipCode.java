@@ -1,5 +1,7 @@
 package pl.coderslab.validator;
 
+import pl.coderslab.validator.impl.ZipCodeValidator;
+
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import java.lang.annotation.ElementType;
