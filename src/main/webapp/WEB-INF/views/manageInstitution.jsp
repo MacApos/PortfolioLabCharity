@@ -42,7 +42,7 @@
                         <div class="form-group form-group--buttons">
                             <a href="${pageContext.request.contextPath}/show-institutions"
                                class="btn btn--highlighted" type="submit">Anuluj</a>
-                            <button class="btn btn--highlighted" type="submit">Zatwierdź</button>
+                            <button class="btn btn--highlighted" type="submit">Potwierdź</button>
                         </div>
                     </div>
                 </div>

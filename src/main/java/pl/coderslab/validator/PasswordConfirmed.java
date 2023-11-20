@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE_USE, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordConfirmed {
-    String message() default "Adres email już istnieje.";
+    String message() default "Hasła nie są takie same.";
 
     Class<?>[] groups() default {};
 

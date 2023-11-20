@@ -4,9 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.User;
 import pl.coderslab.service.UserService;
 import pl.coderslab.validator.groups.Authentication;
@@ -34,39 +32,41 @@ public class PasswordResetController {
         if (result.hasErrors()) {
             return "passwordReset";
         }
-        userService.generateAndEmailToken(model, user);
-        return "redirect:/email-authentication";
+        userService.generateAndEmailToken(user);
+        model.addAttribute("showEmailMessage", true);
+        return "passwordReset";
     }
 
-    @GetMapping("/email-authentication")
-    public String showEmailConfirmationForm(Model model) {
-        model.addAttribute("user", new User());
+    @GetMapping("email-authentication")
+    public String showEmailConfirmationForm(@Validated(Authentication.class) User user, BindingResult result,
+                                            Model model) {
+        model.addAttribute("user", user);
+        if (result.hasErrors()) {
+            return "tokenUnavailable";
+        }
         return "emailAuthentication";
     }
 
-    @PostMapping("/email-authentication")
-    public String processEmailConfirmationForm(@Validated({Authentication.class}) User user, BindingResult result,
-                                               Model model) {
+    @GetMapping("/new-password")
+    public String showNewPasswordForm(@Validated(Authentication.class) User user,
+                                      BindingResult result,
+                                      Model model) {
         model.addAttribute("user", user);
         if (result.hasErrors()) {
-            return "emailAuthentication";
+            return "tokenUnavailable";
         }
-        return "redirect:/new-password";
-    }
-
-    @RequestMapping("/new-password")
-    public String showNewPasswordForm(Model model) {
-        model.addAttribute("user", new User());
         return "newPassword";
     }
 
     @PostMapping("/new-password")
-    public String processNewPasswordForm(@Validated({NewPassword.class}) User user, BindingResult result,
-                                             Model model) {
+    public String processNewPasswordForm(@Validated({NewPassword.class}) User user,
+                                         BindingResult result,
+                                         Model model) {
         model.addAttribute("user", user);
         if (result.hasErrors()) {
             return "newPassword";
         }
-        return "redirect:";
+        userService.changePassword(user);
+        return "redirect:/login";
     }
 }

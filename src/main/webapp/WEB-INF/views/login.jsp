@@ -17,33 +17,21 @@
     <form:form modelAttribute="user" method="post" novalidate="validate">
         <div class="form-group">
             <form:input path="email" placeholder="Email" cssClass="form-control" required="true" minLength="3"
-            value="u1326546@gmail.com"/>
-            <c:if test="${not empty emptyEmail}">
-                <div class="error-div">
-                        ${emptyEmail}
-                </div>
-            </c:if>
-            <c:if test="${not empty emailNotFound}">
-                <div class="error-div">
-                        ${emailNotFound}
-                </div>
-            </c:if>
+                        value="u1326546@gmail.com"/>
+            <form:errors path="email" element="div" cssClass="error-div"/>
             <div class="invalid-feedback">
-                Podaj adres email.
+                Podaj poprawny adres email.
             </div>
         </div>
         <div class="form-group">
-            <form:input path="password" type="password" placeholder="Hasło" cssClass="form-control" required="true"
+            <form:input path="password" type="password" placeholder="Nowe hasło" required="false" minLength="3"
                         value="H@slo123"/>
-            <c:if test="${not empty wrongPassword}">
-                <div class="error-div">
-                        ${wrongPassword}
-                </div>
-            </c:if>
+            <form:errors path="password" element="div" cssClass="error-div"/>
             <div class="invalid-feedback">
-                Podaj hasło.
+                Podaj poprawne hasło.
             </div>
-            <a href="${pageContext.request.contextPath}/password-reset" class="btn btn--small btn--without-border password-reset">Przypomnij hasło</a>
+            <a href="${pageContext.request.contextPath}/password-reset"
+               class="btn btn--small btn--without-border password-reset">Przypomnij hasło</a>
         </div>
 
         <div class="form-group form-group--buttons">

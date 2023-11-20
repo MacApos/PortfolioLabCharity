@@ -208,6 +208,14 @@ document.addEventListener("DOMContentLoaded", function () {
     validateAllForms();
     validRegistrationForm();
     showNavigationBar();
+    showEmailMessage();
+
+    function showEmailMessage() {
+        const myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
+        document.onreadystatechange = function () {
+            myModal.show();
+        };
+    }
 
     function findInput(name) {
         const form = document.querySelector("form#donationForm");
@@ -260,7 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function validRegistrationForm() {
         const registerForm = document.querySelector(".register-form");
         if (registerForm !== null) {
-            registerForm.addEventListener("submit", function (event) {
+            registerForm.addEventListener("submit", function () {
                 const password = this.querySelector("input[name='password']");
                 const confirmPassword = this.querySelector("input[name='password2']");
                 const invalidFeedback = confirmPassword.parentElement.querySelector(".invalid-feedback");
@@ -275,7 +283,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     invalidFeedback.innerText = innerText;
                 }
             })
-            console.log(registerForm.checkValidity());
         }
     }
 
@@ -296,14 +303,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 form.classList.add('was-validated')
             }, false)
         })
-    }
-
-    function findNthParent(childElement, generation) {
-        let parent = childElement
-        for (let i = 1; i <= generation; i++) {
-            parent = parent.parentElement;
-        }
-        return parent;
     }
 
     function findRelatedElement(baseElement, targetElementClass) {

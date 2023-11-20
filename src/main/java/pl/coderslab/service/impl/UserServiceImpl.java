@@ -2,32 +2,33 @@ package pl.coderslab.service.impl;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import pl.coderslab.entity.Role;
+import pl.coderslab.entity.TokenAvailability;
 import pl.coderslab.entity.User;
 import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.UserRepository;
 import pl.coderslab.service.EmailService;
 import pl.coderslab.service.UserService;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
-@SessionAttributes("token")
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final EmailService emailService;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final HttpServletRequest request;
 
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, EmailService emailService,
-                           BCryptPasswordEncoder passwordEncoder) {
+                           BCryptPasswordEncoder passwordEncoder, HttpServletRequest request) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
+        this.request = request;
     }
 
     @Override
@@ -38,6 +39,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User findByToken(String token) {
+        return userRepository.findByToken(token);
     }
 
     @Override
@@ -60,15 +66,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void generateAndEmailToken(Model model, User user) {
+    public void generateAndEmailToken(User user) {
         String email = user.getEmail();
         User existingUser = userRepository.findByEmail(email);
         String token = UUID.randomUUID().toString();
-        model.addAttribute("token", token);
+        String requestURL = request.getRequestURL().toString().replace(request.getRequestURI(),
+                String.format("/email-authentication?token=%s", token));
         emailService.sendEmail(email,
                 "Odzyskiwanie hasła",
-                String.format("Jednorazowy kod niezbędny do zmiany hasła: %s", token));
+                String.format("Link do zmiany hasła: %s", requestURL));
         existingUser.setToken(token);
+        existingUser.setTokenAvailability(TokenAvailability.AVAILABLE);
+        existingUser.setTokenDate(LocalDateTime.now());
         userRepository.save(existingUser);
+    }
+
+    @Override
+    public void changePassword(User user) {
+        String token = user.getToken();
+        User existingUser = userRepository.findByToken(token);
+        existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        existingUser.setTokenAvailability(TokenAvailability.UNAVAILABLE);
+        userRepository.save(existingUser);
+    }
+
+    @Override
+    public List<User> findByRole(String role) {
+        Role exisitingRole = roleRepository.findByName(role);
+        return userRepository.findAllByRoles(exisitingRole);
     }
 }

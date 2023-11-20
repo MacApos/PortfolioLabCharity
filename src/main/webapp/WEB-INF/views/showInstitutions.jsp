@@ -11,30 +11,37 @@
 <body>
 <header class="header--main-page">
     <jsp:include page="headerUserPage.jsp"/>
-    <div class="slogan container container--85">
+    <div class="slogan container container--90">
         <div class="slogan--item">
-            <h2>
-                Lista fundacji:
-            </h2>
             <div class="form-text">
                 <ol>
-                    <c:forEach items="${institutions}" var="institution">
-                        <li>
-                                ${institution.name}<br>
-                                ${institution.description}
-                            <div class="form-group form-group--buttons">
-                                <a href="${pageContext.request.contextPath}/manage-institution?id=${institution.id}"
-                                   class="btn btn--highlighted" type="submit">Edytuj</a>
-                                <a href="${pageContext.request.contextPath}/delete-institution?id=${institution.id}"
-                                   class="btn btn--highlighted" type="submit">Usuń</a>
-                            </div>
-                        </li>
-                    </c:forEach>
-                    <div class="add-institution">
-                        <a href="${pageContext.request.contextPath}/manage-institution"
-                           class="btn btn--highlighted" type="submit">Dodaj</a>
+                    <div class="wrapper">
+                        <h2>
+                            Lista fundacji:
+                        </h2>
+                        <c:forEach items="${institutions}" var="institution">
+                            <li>
+                                <div class="content">
+                                    <div>
+                                            ${institution.name}<br>
+                                            ${institution.description}
+                                    </div>
+                                    <div class="form-group form-group--buttons sidebar">
+                                        <a href="${pageContext.request.contextPath}/manage-institution?id=${institution.id}"
+                                           class="btn btn--highlighted" type="submit">Edytuj</a>
+
+                                        <a href="${pageContext.request.contextPath}/delete-institution?id=${institution.id}"
+                                           class="btn btn--highlighted" type="submit">Usuń</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </c:forEach>
                     </div>
                 </ol>
+                <div class="add-institution">
+                    <a href="${pageContext.request.contextPath}/manage-institution"
+                       class="btn btn--highlighted" type="submit">Dodaj</a>
+                </div>
             </div>
         </div>
     </div>

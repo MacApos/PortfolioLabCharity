@@ -13,20 +13,12 @@
 </header>
 
 <section class="login-page">
-    <h2>Potwierdzenie adresu email</h2>
-    <h3>Podaj kod przesłany na podany adares email, aby ustawić nowe hasło.</h3>
-    <form:form modelAttribute="user" method="post" novalidate="validate">
-        <div class="form-group">
-            <form:input path="token" placeholder="Kod autoryzacyjny" cssClass="form-control" required="true" minLength="3"/>
-            <form:errors path="token" element="div" cssClass="error-div"/>
-            <div class="invalid-feedback">
-                Podaj poprawny kod.
-            </div>
-        <div class="form-group form-group--buttons">
-            <button class="btn btn--highlighted" type="submit">Potwierdź</button>
-        </div>
+    <h2>Email został potwierdzony</h2>
+    <form:form modelAttribute="user" method="get" novalidate="validate"
+               action="${pageContext.request.contextPath}/new-password">
+        <form:hidden path="token" value="${user.token}" />
+        <button class="btn btn--highlighted" type="submit">Potwierdź</button>
     </form:form>
-
 </section>
 
 <jsp:include page="footer.jsp"/>

@@ -1,22 +1,21 @@
 package pl.coderslab.validator.impl;
 
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.context.annotation.Bean;
+import pl.coderslab.entity.TokenAvailability;
 import pl.coderslab.entity.User;
 import pl.coderslab.service.UserService;
-import pl.coderslab.validator.EmailNotFound;
 import pl.coderslab.validator.Token;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.persistence.EnumType;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.time.LocalDateTime;
 
-@SessionAttributes("token")
 public class TokenValidator implements ConstraintValidator<Token, String> {
-    private final HttpSession session;
+    private final UserService userService;
 
-    public TokenValidator(HttpSession session) {
-        this.session = session;
+    public TokenValidator(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
@@ -28,7 +27,14 @@ public class TokenValidator implements ConstraintValidator<Token, String> {
         if (value == null) {
             return true;
         }
-        String token = (String)session.getAttribute("token");
-        return value.equals(token);
+        User user = userService.findByToken(value);
+        if (user == null) {
+            return false;
+        }
+        if (user.getTokenAvailability() == TokenAvailability.UNAVAILABLE) {
+            return false;
+        }
+        return user.getTokenDate().plusSeconds(60).isAfter(LocalDateTime.now());
+//        return user.getTokenDate().plusDays(2).isAfter(LocalDateTime.now());
     }
 }

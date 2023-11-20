@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="pl">
 <jsp:include page="head.jsp"/>
@@ -9,15 +10,25 @@
 <body>
 <header class="header--main-page">
     <jsp:include page="headerUserPage.jsp"/>
+
     <div class="slogan container container--90">
         <div class="slogan--item">
-            <h1>
-                Jesteś zalogowany jako admin<br/>
-                Nazwa admina: ${user.username}<br/>
-                Adres admina: ${user.email}
-            </h1>
+            <sec:authorize access="hasRole('ADMIN')">
+                <h1>
+                    Jesteś zalogowany jako admin<br/>
+                    Nazwa admina: ${user.username}<br/>
+                    Adres admina: ${user.email}
+                </h1>
+            </sec:authorize>
+            <sec:authorize access="hasRole('USER')">
+                <h1>
+                    Nazwa użytkownika: ${user.username}<br/>
+                    Adres email użytkownika: ${user.email}
+                </h1>
+            </sec:authorize>
         </div>
     </div>
+
 </header>
 
 <section class="stats" id="stats">

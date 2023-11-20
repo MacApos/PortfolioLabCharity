@@ -5,7 +5,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="pl">
-
 <nav class="container container--70">
     <ul class="nav--actions">
         <sec:authorize access="hasRole('ADMIN')">
@@ -13,10 +12,10 @@
                 Witaj <sec:authentication property="principal.username"/>
                 <ul class="dropdown">
                     <li><a href="${pageContext.request.contextPath}/show-institutions">Lista fundacji</a></li>
-                    <li><a href="${pageContext.request.contextPath}/#">Nowe zadanie</a></li>
+                    <li><a href="${pageContext.request.contextPath}/show-admins">Lista adminów</a></li>
                     <li>
-                        <form action="${pageContext.request.contextPath}/logout" method="post">
-                            <button class="btn btn--small btn--without-border" type="submit">Wyloguj</button>
+                        <form action="${pageContext.request.contextPath}/logout" class="form-logout" method="post">
+                            <button class="btn-logout" type="submit">Wyloguj</button>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </form>
                     </li>
@@ -32,7 +31,7 @@
                     <li><a href="${pageContext.request.contextPath}/user-page#stats">Moje zbiórki</a></li>
                     <li>
                         <form action="${pageContext.request.contextPath}/logout" method="post">
-                            <button class="btn btn--small btn--without-border" type="submit">Wyloguj</button>
+                            <button class="btn-logout" type="submit">Wyloguj</button>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         </form>
                     </li>

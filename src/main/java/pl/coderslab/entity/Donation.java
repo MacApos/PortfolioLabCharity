@@ -28,7 +28,7 @@ public class Donation {
 
     @JoinColumn(nullable = false)
     @NotNull
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Category> categories = new ArrayList<>();
 
     @JoinColumn(nullable = false)

@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE_USE, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Token {
-    String message() default "Kod nie jest poprawny.";
+    String message() default "Link nie jest poprawny.";
 
     Class<?>[] groups() default {};
 
