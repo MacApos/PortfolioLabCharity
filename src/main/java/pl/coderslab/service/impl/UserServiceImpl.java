@@ -1,5 +1,6 @@
 package pl.coderslab.service.impl;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.CurrentUser;
@@ -77,18 +78,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(CurrentUser currentUser, Long id) {
         User user = findById(id);
-        if (isCurrentUser(currentUser, user)) {
+        if (currentUser.getUser().getId().equals(user.getId())) {
             return;
         }
         User exisitngUser = findById(id);
         exisitngUser.setEnabled(0);
         exisitngUser.setDeleted(1);
         userRepository.save(exisitngUser);
-    }
-
-    @Override
-    public boolean isCurrentUser(CurrentUser currentUser, User user) {
-        return currentUser.getUser().getId().equals(user.getId());
     }
 
     @Override

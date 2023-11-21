@@ -22,7 +22,6 @@ public interface UserService {
 
     void deleteById(CurrentUser currentUser, Long id);
 
-    boolean isCurrentUser(CurrentUser currentUser, User user);
     boolean isAdminLogged(User user);
 
     void generateAndEmailToken(User user);

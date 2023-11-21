@@ -90,9 +90,8 @@ public class AdminController {
     }
 
     @ModelAttribute("currentUser")
-    public User findCurrentUser(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        return findAllAdmins().stream().filter(u -> userService.isCurrentUser(currentUser, u))
-                .findFirst().orElse(null);
+    public User findCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
+        return currentUser.getUser();
     }
 
 }
