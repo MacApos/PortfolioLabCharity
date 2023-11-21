@@ -33,7 +33,7 @@ public class InstitutionController {
         return "showInstitutions";
     }
 
-    @RequestMapping(value = "/manage-institution")
+    @RequestMapping("/edit-institution")
     public String showInstitutionForm(@RequestParam(required = false) Long id, Model model) {
         Institution institution;
         if (id == null) {
@@ -42,20 +42,20 @@ public class InstitutionController {
             institution = institutionService.findById(id);
         }
         model.addAttribute("institution", institution);
-        return "manageInstitution";
+        return "editInstitution";
     }
 
-    @PostMapping("/manage-institution")
+    @PostMapping("/edit-institution")
     public String processInstitutionForm(@Valid Institution institution, BindingResult result, Model model) {
         model.addAttribute("institution", institution);
         if (result.hasErrors()) {
-            return "manageInstitution";
+            return "editInstitution";
         }
         institutionService.save(institution);
         return "redirect:show-institutions";
     }
 
-    @RequestMapping(value = "/delete-institution")
+    @RequestMapping("/delete-institution")
     public String deleteInstitution(@RequestParam Long id) {
         institutionService.deleteById(id);
         return "redirect:show-institutions";

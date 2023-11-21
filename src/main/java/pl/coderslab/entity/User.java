@@ -2,10 +2,7 @@ package pl.coderslab.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.coderslab.validator.EmailAlreadyExists;
-import pl.coderslab.validator.EmailNotFound;
-import pl.coderslab.validator.PasswordConfirmed;
-import pl.coderslab.validator.Token;
+import pl.coderslab.validator.*;
 import pl.coderslab.validator.groups.*;
 
 import javax.persistence.*;
@@ -31,7 +28,8 @@ public class User {
     @Column(nullable = false, unique = true, length = 60)
     @Email(groups = Registration.class)
     @EmailAlreadyExists(groups = Registration.class)
-    @EmailNotFound(groups = {Login.class, PasswordReset.class})
+    @EmailNotFound(groups = {Login.class, PasswordReset.class, NewAdmin.class})
+    @UserIsAdmin(groups = NewAdmin.class)
     private String email;
 
     @NotNull(groups = {Registration.class, Login.class, NewPassword.class})
@@ -45,7 +43,11 @@ public class User {
     @Size(min = 3, groups = {Registration.class, NewPassword.class})
     private String passwordConfirmation;
 
+    @NotNull
     private int enabled;
+
+    @NotNull
+    private int deleted;
 
     @NotNull(groups = Authentication.class)
     @NotBlank(groups = Authentication.class)
@@ -144,6 +146,14 @@ public class User {
         this.tokenDate = tokenDate;
     }
 
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -157,6 +167,7 @@ public class User {
                 ", tokenAvailability=" + tokenAvailability +
                 ", tokenDate=" + tokenDate +
                 ", roles=" + roles +
+                ", softDelete=" + deleted +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package pl.coderslab.service;
 
 import org.springframework.stereotype.Service;
+import pl.coderslab.entity.CurrentUser;
 import pl.coderslab.entity.User;
 
 import java.util.List;
@@ -13,9 +14,16 @@ public interface UserService {
 
     User findByToken(String token);
 
-    boolean isAdminLogged(User user);
+    User findById(Long id);
 
     void saveUser(User user);
+
+    void update(User user);
+
+    void deleteById(CurrentUser currentUser, Long id);
+
+    boolean isCurrentUser(CurrentUser currentUser, User user);
+    boolean isAdminLogged(User user);
 
     void generateAndEmailToken(User user);
 

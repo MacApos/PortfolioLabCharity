@@ -211,10 +211,12 @@ document.addEventListener("DOMContentLoaded", function () {
     showEmailMessage();
 
     function showEmailMessage() {
-        const myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
-        document.onreadystatechange = function () {
-            myModal.show();
-        };
+        for (const elementNodeListOfElement of document.querySelectorAll("#myModal")) {
+            const myModal = new bootstrap.Modal(document.getElementById("myModal"), {});
+            document.onreadystatechange = function () {
+                myModal.show();
+            };
+        }
     }
 
     function findInput(name) {

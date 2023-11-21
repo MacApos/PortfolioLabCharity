@@ -20,7 +20,7 @@
                         value="u1326546@gmail.com"/>
             <form:errors path="email" element="div" cssClass="error-div"/>
             <div class="invalid-feedback">
-                Podaj poprawny adres email.
+                Podany adres email nie został znaleziony.
             </div>
         </div>
         <div class="form-group">

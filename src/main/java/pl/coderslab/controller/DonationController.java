@@ -45,7 +45,7 @@ public class DonationController {
         return "donationDetails";
     }
 
-    @RequestMapping(value = "/manage-donation")
+    @RequestMapping("/edit-donation")
     public String showDonationForm(@RequestParam(required = false) Long id, Model model) {
         List<Category> categories = categoryService.findAll();
         List<Institution> institutions = institutionService.findAll();
@@ -58,20 +58,20 @@ public class DonationController {
         model.addAttribute("donation", donation);
         model.addAttribute("categories", categories);
         model.addAttribute("institutions", institutions);
-        return "manageDonation";
+        return "editDonation";
     }
 
-    @PostMapping("/manage-donation")
+    @PostMapping("/edit-donation")
     public String processDonationForm(@Valid Donation donation, BindingResult result, Model model) {
         model.addAttribute("donation", donation);
         if (result.hasErrors()) {
-            return "manageDonation";
+            return "editDonation";
         }
         donationService.save(donation);
         return "redirect:show-donations";
     }
 
-    @RequestMapping(value = "/delete-donation")
+    @RequestMapping("/delete-donation")
     public String deleteDonation(@RequestParam Long id) {
         donationService.deleteById(id);
         return "redirect:show-donations";

@@ -1038,6 +1038,7 @@ form {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 /* line 5, scss/modules/_forms.scss */

@@ -20,7 +20,7 @@
             <form:input path="email" placeholder="Email" cssClass="form-control" required="true" minLength="3"/>
             <form:errors path="email" element="div" cssClass="error-div"/>
         <div class="invalid-feedback">
-            Podaj poprawny adres email.
+            Podany adres email nie został znaleziony.
         </div>
         <div class="form-group form-group--buttons">
             <button class="btn btn--highlighted" type="submit">Potwierdź</button>

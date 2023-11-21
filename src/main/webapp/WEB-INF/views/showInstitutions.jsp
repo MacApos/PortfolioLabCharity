@@ -27,7 +27,7 @@
                                             ${institution.description}
                                     </div>
                                     <div class="form-group form-group--buttons sidebar">
-                                        <a href="${pageContext.request.contextPath}/manage-institution?id=${institution.id}"
+                                        <a href="${pageContext.request.contextPath}/edit-institution?id=${institution.id}"
                                            class="btn btn--highlighted" type="submit">Edytuj</a>
 
                                         <a href="${pageContext.request.contextPath}/delete-institution?id=${institution.id}"
@@ -39,7 +39,7 @@
                     </div>
                 </ol>
                 <div class="add-institution">
-                    <a href="${pageContext.request.contextPath}/manage-institution"
+                    <a href="${pageContext.request.contextPath}/edit-institution"
                        class="btn btn--highlighted" type="submit">Dodaj</a>
                 </div>
             </div>

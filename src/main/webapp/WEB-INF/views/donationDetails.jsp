@@ -47,7 +47,7 @@
                 Uwagi dla kuriera ${donation.pickUpComment}<br>
 
                 <div class="form-group form-group--buttons">
-                    <a href="${pageContext.request.contextPath}/manage-donation?id=${donation.id}"
+                    <a href="${pageContext.request.contextPath}/edit-donation?id=${donation.id}"
                        class="btn btn--highlighted" type="submit">Edytuj</a>
                     <a href="${pageContext.request.contextPath}/delete-donation?id=${donation.id}"
                        class="btn btn--highlighted" type="submit">Usuń</a>

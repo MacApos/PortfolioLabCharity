@@ -33,7 +33,7 @@
                         </li>
                     </c:forEach>
                     <div class="add-institution">
-                        <a href="${pageContext.request.contextPath}/manage-donation"
+                        <a href="${pageContext.request.contextPath}/edit-donation"
                            class="btn btn--highlighted" type="submit">Dodaj</a>
                     </div>
                 </ol>
