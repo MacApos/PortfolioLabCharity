@@ -1,6 +1,5 @@
 package pl.coderslab.validator;
 
-import pl.coderslab.validator.impl.EmailAlreadyExistsValidator;
 import pl.coderslab.validator.impl.PasswordConfirmedValidator;
 
 import javax.validation.Constraint;

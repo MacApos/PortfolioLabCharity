@@ -1,14 +1,21 @@
 package pl.coderslab.controller;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.CurrentUser;
 import pl.coderslab.entity.User;
 import pl.coderslab.service.UserService;
+import pl.coderslab.validator.groups.EditUser;
+
+import java.util.List;
 
 @Controller
+@Secured("ROLE_ADMIN")
 public class UserController {
     private final UserService userService;
 
@@ -16,21 +23,54 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/create-user")
-    @ResponseBody
-    public String createUser() {
-        User user = new User();
-        user.setEmail("admin");
-        user.setPassword("admin");
-        userService.saveUser(user);
-        return "admin";
+    @GetMapping("/show-users")
+    public String showAdmins() {
+        return "showUsers";
     }
 
-    @GetMapping("/admin")
-    @ResponseBody
-    public String admin(@AuthenticationPrincipal CurrentUser customUser) {
-        User entityUser = customUser.getUser();
-        return "Hello " + entityUser.getEmail();
+    @RequestMapping("/edit-user")
+    public String showUserForm(@RequestParam Long id, Model model) {
+        User user = userService.findById(id);
+        model.addAttribute("user", user);
+        return "editUser";
+    }
+
+    @PostMapping("/edit-user")
+    public String processUserForm(@Validated({EditUser.class}) User user, BindingResult result, Model model) {
+        model.addAttribute("user", user);
+        if (result.hasErrors()) {
+            return "editUser";
+        }
+        userService.update(user);
+        return "redirect:/show-users";
+    }
+
+    @RequestMapping("/block-user")
+    public String blockUser(@RequestParam Long id) {
+        userService.blockById(id);
+        return "redirect:/show-users";
+    }
+
+    @RequestMapping("/unblock-user")
+    public String unblockUser(@RequestParam Long id) {
+        userService.blockById(id);
+        return "redirect:/show-users";
+    }
+
+    @RequestMapping("/delete-user")
+    public String deleteUser(@AuthenticationPrincipal CurrentUser currentUser, @RequestParam Long id) {
+        userService.deleteById(currentUser, id);
+        return "redirect:/show-users";
+    }
+
+    @ModelAttribute("users")
+    public List<User> findAllUsers() {
+        return userService.findByRole("ROLE_USER");
+    }
+
+    @ModelAttribute("currentUser")
+    public User findCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
+        return currentUser.getUser();
     }
 
 }

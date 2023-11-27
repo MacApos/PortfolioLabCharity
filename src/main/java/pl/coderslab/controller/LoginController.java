@@ -33,13 +33,10 @@ public class LoginController {
     }
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
-    @GetMapping("/user-page")
+    @GetMapping("/welcome-page")
     public String showUserPage(@AuthenticationPrincipal CurrentUser customUser, Model model) {
         User user = customUser.getUser();
         model.addAttribute("user", user);
-        if (userService.isAdminLogged(user)) {
-            return "redirect:/admin-page";
-        }
         return "welcomePage";
     }
 }

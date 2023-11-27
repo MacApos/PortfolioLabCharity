@@ -37,7 +37,7 @@ public class PasswordResetController {
         return "passwordReset";
     }
 
-    @GetMapping("email-authentication")
+    @GetMapping("/email-authentication")
     public String showEmailConfirmationForm(@Validated(Authentication.class) User user, BindingResult result,
                                             Model model) {
         model.addAttribute("user", user);
@@ -48,8 +48,7 @@ public class PasswordResetController {
     }
 
     @GetMapping("/new-password")
-    public String showNewPasswordForm(@Validated(Authentication.class) User user,
-                                      BindingResult result,
+    public String showNewPasswordForm(@Validated(Authentication.class) User user, BindingResult result,
                                       Model model) {
         model.addAttribute("user", user);
         if (result.hasErrors()) {
@@ -59,8 +58,7 @@ public class PasswordResetController {
     }
 
     @PostMapping("/new-password")
-    public String processNewPasswordForm(@Validated({NewPassword.class}) User user,
-                                         BindingResult result,
+    public String processNewPasswordForm(@Validated({NewPassword.class}) User user, BindingResult result,
                                          Model model) {
         model.addAttribute("user", user);
         if (result.hasErrors()) {

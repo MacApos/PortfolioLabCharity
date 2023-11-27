@@ -29,15 +29,16 @@
                                 </div>
                             </label>
                         </div>
-                        <div class="form-group form-group--checkbox">
+                        <div class="form-group form-group--inline">
                             <label>
-                                Email <form:select path="email">
+                                Email <form:select path="email" required="true">
                                 <form:option value="" disabled="true" selected="true" label="Wybierz użytkownika"/>
                                 <c:forEach items="${users}" var="user">
+                                    <form:option value="${user.username}" disabled="true" hidden="hidden"/>
                                     <form:option value="${user.email}"/>
+                                    <form:option value="${user.id}" disabled="true" hidden="hidden"/>
                                 </c:forEach>
                                 <form:errors path="email" element="div" cssClass="error-div"/>
-
                             </form:select>
                                 <div class="invalid-feedback">
                                     Podany adres email nie został znaleziony
@@ -52,6 +53,7 @@
                         </div>
                     </div>
                 </div>
+                <form:hidden path="id" value=""/>
             </form:form>
         </div>
     </div>

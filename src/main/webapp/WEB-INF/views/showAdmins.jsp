@@ -30,15 +30,14 @@
                                     <div>
                                             ${admin.username}<br>
                                             ${admin.email}<br>
-                                        current user: ${currentUser.id}<br>
-                                        admin: ${admin.id}
                                     </div>
                                     <div class="form-group form-group--buttons sidebar">
                                         <a href="${pageContext.request.contextPath}/edit-admin?id=${admin.id}"
                                            class="btn btn--highlighted" type="submit">Edytuj</a>
                                         <c:choose>
                                             <c:when test="${currentUser.id eq admin.id}">
-                                                <button class="btn btn--highlighted" style="background-color: yellow">
+                                                <button type="button" class="btn btn--highlighted" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal">
                                                     Usuń
                                                 </button>
                                             </c:when>
@@ -52,33 +51,31 @@
                                 </div>
                             </li>
                         </c:forEach>
+                        <a href="${pageContext.request.contextPath}/add-admin" class="btn btn--highlighted"
+                           type="submit">Dodaj</a>
                     </div>
                 </ol>
-                <div class="add-institution">
-                    <a href="${pageContext.request.contextPath}/add-admin"
-                       class="btn btn--highlighted" type="submit">Dodaj</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Uwaga!</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Nie możesz usunąć uprawnień administratora użytkownikowi, który jest obecnie zalogowany.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
     </div>
-    <c:if test="${isCurrentUser==true}">
-        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title" id="exampleModalLabel">Uwaga!</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Nie możesz usunąć admina, który jest aktualnie zalogowany.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn--inherit" data-bs-dismiss="modal">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </c:if>
 </header>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"

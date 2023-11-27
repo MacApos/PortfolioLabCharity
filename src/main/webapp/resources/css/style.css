@@ -426,7 +426,7 @@ h2:after {
     content: "";
     display: block;
     width: 256px;
-    height: 40px;
+    height: 35px;
     background-image: url(../images/decoration.svg);
     background-size: contain;
     margin-top: 25px;
@@ -497,7 +497,7 @@ h2:after {
 }
 
 .modal {
-    font-size: 1.6rem;
+    font-size: 2rem;
     --bs-border-width: 1px;
     --bs-border-radius-lg: 0rem;
     --bs-border-color: #dee2e6;
@@ -517,7 +517,7 @@ h2:after {
     --bs-modal-header-padding: var(--bs-modal-padding) var(--bs-modal-padding);
     --bs-modal-header-border-color: var(--bs-border-color);
     --bs-modal-header-border-width: var(--bs-border-width);
-    --bs-modal-title-line-height: 1.5;
+    --bs-modal-title-line-height: 2em;
     --bs-modal-footer-gap: 0.5rem;
     --bs-modal-footer-bg: ;
     --bs-modal-footer-border-color: var(--bs-border-color);
@@ -855,7 +855,8 @@ h2:after {
     display: block;
 }
 
-.was-validated input:invalid ~ .invalid-feedback {
+.was-validated input:invalid ~ .invalid-feedback,
+.was-validated select:invalid ~ .invalid-feedback {
     display: block;
 }
 
@@ -869,7 +870,8 @@ h2:after {
 }
 
 form .edit-form .form-section--column .form-group label textarea,
-form .edit-form .form-section--column .form-group label input {
+form .edit-form .form-section--column .form-group label input,
+form .edit-form .form-section--column .form-group label select {
     max-width: 400px !important;
     width: 400px;
 !important;
@@ -886,7 +888,6 @@ form .edit-form .form-section--column .form-group label input {
     vertical-align: top;
 }
 
-
 .form-logout {
     padding: 0 5px;
 }
@@ -899,6 +900,11 @@ form .edit-form .form-section--column .form-group label input {
     cursor: pointer;
 }
 
+.form-text h2 {
+    margin-top:0;
+    margin-bottom: 0;
+}
+
 .wrapper {
     margin: auto;
     display: grid;
@@ -906,40 +912,76 @@ form .edit-form .form-section--column .form-group label input {
     gap: 10px;
 }
 
-.wrapper > h2 {
-    align-self: flex-end;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.wrapper > h2:after {
-    /*margin-top: 0;*/
+.wrapper > a:last-child {
+    justify-self: flex-end;
+    height: max-content;
 }
 
 .content {
     display: flex;
     flex-wrap: wrap;
     text-align: justify;
-    justify-content: flex-end;
+    container-type: inline-size;
+    justify-content: space-between;
     align-items: flex-start;
     column-gap: 10px;
 }
 
-.sidebar {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
-    gap: 10px;
+/*.content > div:first-child {*/
+    /*display: flex;*/
+    /*flex-grow: 1;*/
+    /*min-width: 350px;*/
+    /*flex-shrink: 1;*/
+    /*flex-basis: 350px;*/
+/*}*/
+
+:root {
+    --gap: 10px;
+    --flex-basis: 125px;
 }
 
-.content > div:first-child {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 60%;
+.sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    flex-basis: calc(var(--flex-basis) * 2 + (var(--gap)));
+    flex-shrink: 0;
+    gap: var(--gap);
+}
+
+.sidebar > a {
+    flex-basis: var(--flex-basis);
+}
+
+@container (max-width:475px) {
+    .sidebar{
+        justify-content: center;
+        flex-basis: 100%;
+    }
 }
 
 ol {
-    margin:0;
+    margin: 0;
+}
+
+select:required:invalid {
+    color: grey;
+}
+
+option[value=""][disabled] {
+    display: none;
+}
+
+option {
+    color: black;
+}
+
+option {
+    border: 1px solid #3c3c3c;
+}
+
+option#username {
+    display: none;
 }
 
 /* ========================================================================== */
@@ -1050,7 +1092,8 @@ form .form-group {
 
 /* line 10, scss/modules/_forms.scss */
 form .form-group input:not([type="checkbox"]):not([type="radio"]),
-form .form-group textarea {
+form .form-group textarea,
+form .form-group select {
     border: 1px solid #3c3c3c;
     background: transparent;
     padding: 4px 14px;
@@ -1297,11 +1340,12 @@ form .form-section--columns > div:last-of-type {
 
 /* line 203, scss/modules/_forms.scss */
 form .form-section--columns .form-group label {
-    width: 100%;
+    width: 500px;
     display: block;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    flex-wrap: wrap;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
@@ -1311,7 +1355,9 @@ form .form-section--columns .form-group label {
 }
 
 /* line 210, scss/modules/_forms.scss */
-form .form-section--columns .form-group label textarea, form .form-section--columns .form-group label input {
+form .form-section--columns .form-group label textarea,
+form .form-section--columns .form-group label input,
+form .form-section--columns .form-group label select {
     margin-left: 20px;
     width: 200px;
 }
@@ -1416,7 +1462,7 @@ header .slogan {
     -ms-flex-align: center;
     align-items: center;
     flex-grow: 1;
-    margin-bottom:20px;
+    margin-bottom: 20px;
 }
 
 /* line 29, scss/modules/_header.scss */
@@ -1449,7 +1495,7 @@ header .slogan--item h1 {
 }
 
 /* line 20, scss/partials/_mixins.scss */
-header .slogan--item h1:after {
+header .slogan--item h1:after:not(.no-decoration) {
     content: "";
     display: block;
     width: 256px;
@@ -2320,7 +2366,7 @@ footer .bottom-line--icons a img {
     content: "";
     display: block;
     width: 256px;
-    height: 40px;
+    height: 35px;
     background-image: url(../images/decoration.svg);
     background-size: contain;
     margin-top: 25px;

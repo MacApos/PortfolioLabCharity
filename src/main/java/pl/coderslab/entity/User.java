@@ -15,21 +15,22 @@ import java.util.Set;
 
 @Entity
 @PasswordConfirmed(groups = {Registration.class, NewPassword.class})
+@EmailAlreadyExists(groups = {Registration.class, EditUser.class})
+@UserIsAlreadyAdmin(groups = NewAdmin.class)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true, length = 60)
-    @Size(min = 3, groups = Registration.class)
-    @NotBlank(groups = Registration.class)
+    @Size(min = 3, groups = {Registration.class, NewAdmin.class, EditUser.class})
     private String username;
 
     @Column(nullable = false, unique = true, length = 60)
-    @Email(groups = Registration.class)
-    @EmailAlreadyExists(groups = Registration.class)
+    @Email(groups = {Registration.class, EditUser.class})
+//    @NotNull(groups = {Registration.class, EditUser.class})
+    @NotBlank(groups = {Registration.class, EditUser.class})
     @EmailNotFound(groups = {Login.class, PasswordReset.class, NewAdmin.class})
-    @UserIsAdmin(groups = NewAdmin.class)
     private String email;
 
     @NotNull(groups = {Registration.class, Login.class, NewPassword.class})

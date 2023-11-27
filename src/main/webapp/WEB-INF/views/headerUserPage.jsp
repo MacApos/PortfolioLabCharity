@@ -13,6 +13,7 @@
                 <ul class="dropdown">
                     <li><a href="${pageContext.request.contextPath}/show-institutions">Lista fundacji</a></li>
                     <li><a href="${pageContext.request.contextPath}/show-admins">Lista adminów</a></li>
+                    <li><a href="${pageContext.request.contextPath}/show-users">Lista użytkowników</a></li>
                     <li>
                         <form action="${pageContext.request.contextPath}/logout" class="form-logout" method="post">
                             <button class="btn-logout" type="submit">Wyloguj</button>
@@ -26,9 +27,9 @@
             <li class="logged-user">
                 Witaj <sec:authentication property="principal.username"/>
                 <ul class="dropdown">
-                    <li><a href="${pageContext.request.contextPath}/user-page">Profil</a></li>
+                    <li><a href="${pageContext.request.contextPath}/welcome-page">Profil</a></li>
                     <li><a href="${pageContext.request.contextPath}/show-donations">Lista darowizn</a></li>
-                    <li><a href="${pageContext.request.contextPath}/user-page#stats">Moje zbiórki</a></li>
+                    <li><a href="${pageContext.request.contextPath}/welcome-page#stats">Moje zbiórki</a></li>
                     <li>
                         <form action="${pageContext.request.contextPath}/logout" method="post">
                             <button class="btn-logout" type="submit">Wyloguj</button>

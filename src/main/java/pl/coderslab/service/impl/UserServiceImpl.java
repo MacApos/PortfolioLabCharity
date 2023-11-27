@@ -57,12 +57,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findByRole(String roleName) {
+        return userRepository.findAllByRoles(roleName);
+    }
+
+    public User addRole(String roleName, User user){
+        Role role = roleRepository.findByName(roleName);
+        HashSet<Role> roles = new HashSet<>();
+        roles.add(role);
+        user.setRoles(roles);
+        return user;
+    }
+
+    @Override
+    public void addAdmin(User user) {
+        user = addRole("ROLE_ADMIN", user);
+        update(user);
+    }
+
+    @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
         user.setDeleted(0);
-        Role userRole = roleRepository.findByName("ROLE_USER");
-        user.setRoles(new HashSet<>(Arrays.asList(userRole)));
+        user = addRole("ROLE_USER", user);
         userRepository.save(user);
     }
 
@@ -81,19 +99,26 @@ public class UserServiceImpl implements UserService {
         if (currentUser.getUser().getId().equals(user.getId())) {
             return;
         }
-        User exisitngUser = findById(id);
-        exisitngUser.setEnabled(0);
-        exisitngUser.setDeleted(1);
-        userRepository.save(exisitngUser);
+        user.setEnabled(0);
+        user.setDeleted(1);
+        userRepository.save(user);
     }
 
     @Override
-    public boolean isAdminLogged(User user) {
-        if (user.getDeleted() == 1) {
-            return false;
+    public void blockById(Long id) {
+        User user = findById(id);
+        user.setEnabled(0);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteAdmin(CurrentUser currentUser, Long id) {
+        User user = findById(id);
+        if (currentUser.getUser().getId().equals(user.getId())) {
+            return;
         }
-        Set<Role> roles = user.getRoles();
-        return roles.stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"));
+        user = addRole("ROLE_USER", user);
+        userRepository.save(user);
     }
 
     @Override
@@ -119,10 +144,5 @@ public class UserServiceImpl implements UserService {
         existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
         existingUser.setTokenAvailability(TokenAvailability.UNAVAILABLE);
         userRepository.save(existingUser);
-    }
-
-    @Override
-    public List<User> findByRole(String role) {
-        return userRepository.findAllByRoles(role);
     }
 }

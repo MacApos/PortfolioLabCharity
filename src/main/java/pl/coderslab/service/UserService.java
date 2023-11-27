@@ -16,17 +16,20 @@ public interface UserService {
 
     User findById(Long id);
 
-    void saveUser(User user);
+    List<User> findByRole(String roleName);
+
+    void addAdmin(User user);
 
     void update(User user);
 
-    void deleteById(CurrentUser currentUser, Long id);
+    void saveUser(User user);
 
-    boolean isAdminLogged(User user);
+    void deleteById(CurrentUser currentUser, Long id);
+    void blockById(Long id);
+
+    void deleteAdmin(CurrentUser currentUser, Long id);
 
     void generateAndEmailToken(User user);
 
     void changePassword(User user);
-
-    List<User> findByRole(String role);
 }

@@ -17,16 +17,16 @@
 
     <form:form modelAttribute="user" method="post" novalidate="validate">
         <div class="form-group">
-            <form:input path="password" type="password" placeholder="Nowe hasło" required="false" minLength="3"
-                        value="H@slo123"/>
+            <form:input path="password" type="password" placeholder="Nowe hasło" />
+<%--            value="H@slo123" required="false" minLength="3"/>--%>
             <form:errors path="password" element="div" cssClass="error-div"/>
             <div class="invalid-feedback">
                 Podaj poprawne hasło.
             </div>
         </div>
         <div class="form-group">
-            <form:input path="passwordConfirmation" type="password" placeholder="Powtórz hasło" required="true"
-                        minLength="3" value="H@slo123"/>
+            <form:input path="passwordConfirmation" type="password" placeholder="Powtórz hasło"/>
+<%--                        value="H@slo123" required="true" minLength="3" />--%>
             <form:errors id="${user.id}" element="div" cssClass="error-div"/>
             <div class="invalid-feedback">
                 Podaj poprawne hasło.

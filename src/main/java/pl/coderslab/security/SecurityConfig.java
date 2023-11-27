@@ -18,7 +18,7 @@ public class SecurityConfig {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
                 .and().formLogin().loginPage("/login")
-                .defaultSuccessUrl("/user-page").usernameParameter("email")
+                .defaultSuccessUrl("/welcome-page").usernameParameter("email")
                 .and().logout().logoutSuccessUrl("/")
                 .permitAll()
                 .and().exceptionHandling().accessDeniedPage("/login");

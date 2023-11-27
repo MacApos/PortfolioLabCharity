@@ -11,13 +11,9 @@ import pl.coderslab.entity.CurrentUser;
 import pl.coderslab.entity.User;
 import pl.coderslab.service.UserService;
 import pl.coderslab.validator.groups.NewAdmin;
-import pl.coderslab.validator.groups.Registration;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Controller
 @Secured("ROLE_ADMIN")
@@ -28,20 +24,13 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping("/admin-page")
-    public String showAdminPage(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-        User admin = customUser.getUser();
-        model.addAttribute("user", admin);
-        return "welcomePage";
-    }
-
     @GetMapping("/show-admins")
-    public String showAdmins(Model model) {
+    public String showAdmins() {
         return "showAdmins";
     }
 
     @RequestMapping("/edit-admin")
-    public String showAdminForm(@RequestParam(required = false) Long id, Model model) {
+    public String showAdminForm(@RequestParam Long id, Model model) {
         User admin = userService.findById(id);
         model.addAttribute("admin", admin);
         return "editAdmin";
@@ -54,13 +43,13 @@ public class AdminController {
             return "editAdmin";
         }
         userService.update(admin);
-        return "redirect:show-admins";
+        return "redirect:/show-admins";
     }
 
     @RequestMapping("/delete-admin")
     public String deleteAdmin(@AuthenticationPrincipal CurrentUser currentUser, @RequestParam Long id) {
-        userService.deleteById(currentUser, id);
-        return "showAdmins";
+        userService.deleteAdmin(currentUser, id);
+        return "redirect:/show-admins";
     }
 
     @RequestMapping("/add-admin")
@@ -76,7 +65,8 @@ public class AdminController {
         if (result.hasErrors()) {
             return "addAdmin";
         }
-        return "showAdmins";
+        userService.addAdmin(admin);
+        return "redirect:/show-admins";
     }
 
     @ModelAttribute("admins")
