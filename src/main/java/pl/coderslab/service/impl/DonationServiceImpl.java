@@ -2,8 +2,10 @@ package pl.coderslab.service.impl;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import pl.coderslab.entity.Deleted;
 import pl.coderslab.entity.Donation;
 import pl.coderslab.entity.Status;
+import pl.coderslab.entity.User;
 import pl.coderslab.repository.DonationRepository;
 import pl.coderslab.service.DonationService;
 
@@ -38,20 +40,24 @@ public class DonationServiceImpl implements DonationService {
     }
 
     @Override
-    public List<Donation> findAll() {
-        Sort sort = Sort.by("status").descending();
-        sort = sort.and(Sort.by("pickUpDate").ascending());
-        sort = sort.and(Sort.by("OrderDate").ascending());
-        return donationRepository.findAll(sort);
+    public List<Donation> findAllByUser(User user) {
+        Sort sort = Sort.by("status").ascending()
+                .and(Sort.by("pickUpDate").ascending())
+                .and(Sort.by("pickUpTime").ascending())
+                .and(Sort.by("orderDate").ascending());
+        return donationRepository.findAllByUser(user, sort);
     }
 
     @Override
     public Donation findById(Long id) {
-        return donationRepository.findById(id).orElse(null);
+        return donationRepository.findByIdAndDeleted(id, Deleted.AVAILABLE)
+                .orElse(null);
     }
 
     @Override
     public void deleteById(Long id) {
-        donationRepository.deleteById(id);
+        Donation donation = findById(id);
+        donation.setDeleted(Deleted.DELETED);
+        donationRepository.save(donation);
     }
 }

@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"username", "deleted"}),
+        @UniqueConstraint(columnNames = {"email", "deleted"})})
 @PasswordConfirmed(groups = {Registration.class, NewPassword.class})
 @EmailAlreadyExists(groups = {Registration.class, EditUser.class})
 @UserIsAlreadyAdmin(groups = NewAdmin.class)
@@ -22,11 +24,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 60)
+    @Column(nullable = false)
     @Size(min = 3, groups = {Registration.class, NewAdmin.class, EditUser.class})
     private String username;
 
-    @Column(nullable = false, unique = true, length = 60)
+    @Column(nullable = false, length = 60)
     @Email(groups = {Registration.class, EditUser.class})
 //    @NotNull(groups = {Registration.class, EditUser.class})
     @NotBlank(groups = {Registration.class, EditUser.class})
@@ -45,7 +47,7 @@ public class User {
     private String passwordConfirmation;
 
     @NotNull
-    private int enabled;
+    private UserAvailability enabled;
 
     @NotNull
     private int deleted;
@@ -107,11 +109,11 @@ public class User {
         this.passwordConfirmation = passwordConfirmation;
     }
 
-    public int getEnabled() {
+    public UserAvailability getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(int enabled) {
+    public void setEnabled(UserAvailability enabled) {
         this.enabled = enabled;
     }
 
@@ -164,11 +166,11 @@ public class User {
                 ", password='" + password + '\'' +
                 ", passwordConfirmation='" + passwordConfirmation + '\'' +
                 ", enabled=" + enabled +
+                ", deleted=" + deleted +
                 ", token='" + token + '\'' +
                 ", tokenAvailability=" + tokenAvailability +
                 ", tokenDate=" + tokenDate +
                 ", roles=" + roles +
-                ", softDelete=" + deleted +
                 '}';
     }
 }

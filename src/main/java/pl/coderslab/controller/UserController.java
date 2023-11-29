@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.CurrentUser;
 import pl.coderslab.entity.User;
+import pl.coderslab.entity.UserAvailability;
 import pl.coderslab.service.UserService;
 import pl.coderslab.validator.groups.EditUser;
 
@@ -47,13 +48,13 @@ public class UserController {
 
     @RequestMapping("/block-user")
     public String blockUser(@RequestParam Long id) {
-        userService.blockById(id);
+        userService.enableUser(id, UserAvailability.UNAVAILABLE);
         return "redirect:/show-users";
     }
 
     @RequestMapping("/unblock-user")
     public String unblockUser(@RequestParam Long id) {
-        userService.blockById(id);
+        userService.enableUser(id, UserAvailability.AVAILABLE);
         return "redirect:/show-users";
     }
 

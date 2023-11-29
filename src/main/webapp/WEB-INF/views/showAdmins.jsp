@@ -14,45 +14,49 @@
     <div class="slogan container container--90">
         <div class="slogan--item">
             <div class="form-text">
+                <h2>
+                    Lista adminów
+                </h2>
                 <ol>
                     <div class="wrapper">
-                        <c:if test="${admins == null}">
-                            <div>
-                                Brak adminów.
-                            </div>
-                        </c:if>
-                        <h2>
-                            Lista adminów:
-                        </h2>
-                        <c:forEach items="${admins}" var="admin">
-                            <li>
-                                <div class="content">
-                                    <div>
-                                            ${admin.username}<br>
-                                            ${admin.email}<br>
-                                    </div>
-                                    <div class="form-group form-group--buttons sidebar">
-                                        <a href="${pageContext.request.contextPath}/edit-admin?id=${admin.id}"
-                                           class="btn btn--highlighted" type="submit">Edytuj</a>
-                                        <c:choose>
-                                            <c:when test="${currentUser.id eq admin.id}">
-                                                <button type="button" class="btn btn--highlighted" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal">
-                                                    Usuń
-                                                </button>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <a href="${pageContext.request.contextPath}/delete-admin?id=${admin.id}"
-                                                   class="btn btn--highlighted" type="submit">Usuń</a>
-                                            </c:otherwise>
-                                        </c:choose>
+                        <c:choose>
+                            <c:when test="${empty users}">
+                                <h1 class="no-decoration">
+                                    Brak adminów
+                                </h1>
+                            </c:when>
+                            <c:otherwise>
+                                <c:forEach items="${admins}" var="admin">
+                                    <li>
+                                        <div class="content">
+                                            <div>
+                                                    ${admin.username}<br>
+                                                    ${admin.email}<br>
+                                            </div>
+                                            <div class="form-group form-group--buttons sidebar">
+                                                <a href="${pageContext.request.contextPath}/edit-admin?id=${admin.id}"
+                                                   class="btn btn--highlighted" type="submit">Edytuj</a>
+                                                <c:choose>
+                                                    <c:when test="${currentUser.id eq admin.id}">
+                                                        <a class="btn btn--highlighted" data-bs-toggle="modal"
+                                                           data-bs-target="#exampleModal">Usuń</a>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a href="${pageContext.request.contextPath}/delete-admin?id=${admin.id}"
+                                                           class="btn btn--highlighted" type="submit">Usuń</a>
+                                                    </c:otherwise>
+                                                </c:choose>
 
-                                    </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                                <div class="form-group form-group--buttons sidebar">
+                                    <a href="${pageContext.request.contextPath}/add-admin" class="btn btn--highlighted"
+                                       type="submit">Dodaj</a>
                                 </div>
-                            </li>
-                        </c:forEach>
-                        <a href="${pageContext.request.contextPath}/add-admin" class="btn btn--highlighted"
-                           type="submit">Dodaj</a>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </ol>
             </div>

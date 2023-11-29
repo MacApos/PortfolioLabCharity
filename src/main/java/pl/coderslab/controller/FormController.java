@@ -36,15 +36,15 @@ public class FormController {
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/form")
-    public String addDonation(Model model) {
+    public String addDonation(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         Donation donation = new Donation();
+        donation.setUser(currentUser.getUser());
         model.addAttribute("donation", donation);
         return "form";
     }
 
     @PostMapping("/form")
-    public String addDonation(@Valid Donation donation, BindingResult results, Model model,
-                              @AuthenticationPrincipal CurrentUser customUser) {
+    public String addDonation(@Valid Donation donation, BindingResult results, Model model) {
         model.addAttribute("donation", donation);
         if (results.hasErrors()) {
             return "form";
@@ -55,7 +55,7 @@ public class FormController {
                 .map(category -> " - " + category.getName())
                 .collect(Collectors.joining(",\n"));
         emailService.sendEmailWithAttachment(
-                customUser.getUser().getEmail(),
+                donation.getUser().getEmail(),
                 "Potwierdzenie zamówienia odbioru darowizny",
                 String.format("""
                                 Dziękujemy za przekazaną darowiznę.

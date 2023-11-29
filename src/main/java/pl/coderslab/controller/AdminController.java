@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.CurrentUser;
 import pl.coderslab.entity.User;
 import pl.coderslab.service.UserService;
+import pl.coderslab.validator.groups.EditUser;
 import pl.coderslab.validator.groups.NewAdmin;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -30,17 +30,17 @@ public class AdminController {
     }
 
     @RequestMapping("/edit-admin")
-    public String showAdminForm(@RequestParam Long id, Model model) {
+    public String showEditAdminForm(@RequestParam Long id, Model model) {
         User admin = userService.findById(id);
-        model.addAttribute("admin", admin);
-        return "editAdmin";
+        model.addAttribute("user", admin);
+        return "editUser";
     }
 
     @PostMapping("/edit-admin")
-    public String processAdminForm(@Valid User admin, BindingResult result, Model model) {
-        model.addAttribute("admin", admin);
+    public String processEditAdminForm(@Validated({EditUser.class}) User admin, BindingResult result, Model model) {
+        model.addAttribute("user", admin);
         if (result.hasErrors()) {
-            return "editAdmin";
+            return "editUser";
         }
         userService.update(admin);
         return "redirect:/show-admins";

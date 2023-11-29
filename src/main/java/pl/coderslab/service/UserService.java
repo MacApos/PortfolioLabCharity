@@ -3,6 +3,7 @@ package pl.coderslab.service;
 import org.springframework.stereotype.Service;
 import pl.coderslab.entity.CurrentUser;
 import pl.coderslab.entity.User;
+import pl.coderslab.entity.UserAvailability;
 
 import java.util.List;
 
@@ -25,7 +26,8 @@ public interface UserService {
     void saveUser(User user);
 
     void deleteById(CurrentUser currentUser, Long id);
-    void blockById(Long id);
+
+    void enableUser(Long id, UserAvailability enabled);
 
     void deleteAdmin(CurrentUser currentUser, Long id);
 

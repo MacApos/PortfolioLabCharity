@@ -32,14 +32,14 @@ public class DonationController {
     }
 
     @GetMapping("/show-donations")
-    public String showDonations(Model model) {
-        List<Donation> donations = donationService.findAll();
+    public String showDonations(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        List<Donation> donations = donationService.findAllByUser(currentUser.getUser());
         model.addAttribute("donations", donations);
         return "showDonations";
     }
 
     @RequestMapping("/donation-details")
-    public String showDonationDetails(@RequestParam(required = false) Long id, Model model) {
+    public String showDonationDetails(@RequestParam Long id, Model model) {
         Donation donation = donationService.findById(id);
         model.addAttribute("donation", donation);
         return "donationDetails";

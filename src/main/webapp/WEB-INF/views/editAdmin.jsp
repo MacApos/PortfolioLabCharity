@@ -32,7 +32,7 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 Email <form:textarea path="email" placeholder="Opis fundacji" required="true"
-                                                    minlength="3" value="${admin.email}"/>
+                                                     minlength="3"/>
                                 <form:errors path="email" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
                                     Podaj poprawny adres email.

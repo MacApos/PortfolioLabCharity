@@ -29,13 +29,13 @@ public class EmailAlreadyExistsValidator implements ConstraintValidator<EmailAlr
         String userEmail = user.getEmail();
 
         User existingUser;
-        if(id == null){
+        if (id == null) {
             existingUser = userService.findByEmail(userEmail);
             return existingUser == null;
         }
         existingUser = userService.findById(id);
         String existingUserEmail = existingUser.getEmail();
-        if( existingUserEmail.equals(userEmail)){
+        if (existingUserEmail.equals(userEmail)) {
             return true;
         }
         return userService.findByEmail(userEmail) == null;

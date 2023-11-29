@@ -14,41 +14,29 @@
     <div class="slogan container container--85">
         <div class="slogan--item">
             <h2>
-                Edytuj Użytkownika:
+                Edytuj użytkownika:
             </h2>
             <form:form modelAttribute="user" method="post" novalidate="validate" cssClass="form-text">
                 <div class="form-section form-section--columns edit-form ">
                     <div class="form-section--column">
                         <div class="form-group form-group--inline">
                             <label>
-                                Nazwa <form:input path="username" placeholder="Nazwa użytkownika"
-                                                  value="${user.username}"/>
-                                    <%--                                                  required="true" minlength="3"/>--%>
+                                Nazwa <form:input path="username" placeholder="Nazwa użytkownika" required="true"
+                                                  minlength="3"/>
                                 <form:errors path="username" element="div" cssClass="error-div"/>
-                                    <%--                                <div class="invalid-feedback">--%>
-                                    <%--                                    Podaj poprawną nazwę.--%>
-                                    <%--                                </div>--%>
+                                <div class="invalid-feedback">
+                                    Podaj poprawną nazwę.
+                                </div>
                             </label>
                         </div>
-<%--                        <div class="form-group form-group--inline">--%>
-<%--                            <label>--%>
-<%--                                Email <form:input path="email" placeholder="Email użytkownika"/>--%>
-<%--&lt;%&ndash;                                value="${user.email}" required="true" minlength="3"/>&ndash;%&gt;--%>
-<%--                                <form:errors id="${user.id}" element="div" cssClass="error-div"/>--%>
-<%--                                <div class="invalid-feedback">--%>
-<%--                                    Podaj poprawny adres email.--%>
-<%--                                </div>--%>
-<%--                            </label>--%>
-<%--                        </div>--%>
-
                         <div class="form-group form-group--inline">
                             <label>
-                                Email <form:input path="email" placeholder="Email użytkownika"/>
-                                    <%--                        value="H@slo123" required="true" minLength="3" />--%>
+                                Email <form:input path="email" placeholder="Email użytkownika" required="true"
+                                                  minLength="3"/>
                                 <form:errors id="${user.id}" element="div" cssClass="error-div"/>
                                 <form:errors path="email" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
-                                    Podaj poprawne hasło.
+                                    Podaj poprawny adres email.
                                 </div>
                             </label>
                         </div>

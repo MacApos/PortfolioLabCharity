@@ -944,6 +944,7 @@ form .edit-form .form-section--column .form-group label select {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
+    align-items: flex-start;
     flex-basis: calc(var(--flex-basis) * 2 + (var(--gap)));
     flex-shrink: 0;
     gap: var(--gap);

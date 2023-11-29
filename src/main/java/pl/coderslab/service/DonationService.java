@@ -1,21 +1,21 @@
 package pl.coderslab.service;
 
 import pl.coderslab.entity.Donation;
+import pl.coderslab.entity.User;
 
 import java.util.List;
 
 public interface DonationService {
-    int count();
-
-    int sumBagsQuantity();
-
-    List<Donation> findAll();
-
     Donation findById(Long id);
 
-    void deleteById(Long id);
+    List<Donation> findAllByUser(User user);
 
     void save(Donation donation);
 
+    void deleteById(Long id);
+
+    int count();
+
+    int sumBagsQuantity();
 
 }

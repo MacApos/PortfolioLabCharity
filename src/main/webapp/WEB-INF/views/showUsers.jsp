@@ -34,17 +34,20 @@
                                                     ${user.email}<br>
                                             </div>
                                             <div class="form-group form-group--buttons sidebar">
-                                                <a class="btn btn--highlighted" type="submit">Edytuj</a>
-                                                <a href="${pageContext.request.contextPath}/delete-user?id=${user.id}"
-                                                   class="btn btn--highlighted" type="submit">Usuń</a>
                                                 <c:choose>
-                                                    <c:when test="${user.enabled==1}">
-                                                        <a href="${pageContext.request.contextPath}/unblock-user?id=${user.id}"
+                                                    <c:when test="${user.enabled.ordinal()==1}">
+                                                        <a href="${pageContext.request.contextPath}/edit-user?id=${user.id}"
+                                                           class="btn btn--highlighted" type="submit">Edytuj</a>
+                                                        <a href="${pageContext.request.contextPath}/delete-user?id=${user.id}"
+                                                           class="btn btn--highlighted" type="submit">Usuń</a>
+                                                        <a href="${pageContext.request.contextPath}/block-user?id=${user.id}"
                                                            class="btn btn--highlighted" type="submit">Zablokuj</a>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <a href="${pageContext.request.contextPath}/block-user?id=${user.id}"
+                                                        <a href="${pageContext.request.contextPath}/unblock-user?id=${user.id}"
                                                            class="btn btn--highlighted" type="submit">Odblokuj</a>
+                                                        <a href="${pageContext.request.contextPath}/delete-user?id=${user.id}"
+                                                           class="btn btn--highlighted" type="submit">Usuń</a>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </div>
@@ -56,24 +59,6 @@
                     </div>
                 </ol>
 
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Uwaga!</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Nie możesz usunąć uprawnień administratora, który jest obecnie zalogowany.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
-                </div>
             </div>
         </div>
     </div>

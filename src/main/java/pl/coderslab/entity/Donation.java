@@ -36,6 +36,14 @@ public class Donation {
     @ManyToOne(cascade = CascadeType.ALL)
     private Institution institution;
 
+    @JoinColumn(nullable = false)
+    @NotNull
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
+
+    @NotNull
+    private Deleted deleted;
+
     @Column(nullable = false)
     @NotNull
     @NotBlank
@@ -102,6 +110,22 @@ public class Donation {
 
     public void setInstitution(Institution institution) {
         this.institution = institution;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Deleted getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Deleted deleted) {
+        this.deleted = deleted;
     }
 
     public String getStreet() {
@@ -175,13 +199,14 @@ public class Donation {
                 ", quantity=" + quantity +
                 ", categories=" + categories +
                 ", institution=" + institution +
+                ", user=" + user +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
                 ", zipCode='" + zipCode + '\'' +
                 ", pickUpDate=" + pickUpDate +
                 ", pickUpTime=" + pickUpTime +
                 ", pickUpComment='" + pickUpComment + '\'' +
-                ", OrderDate=" + orderDate +
+                ", orderDate=" + orderDate +
                 ", status=" + status +
                 '}';
     }

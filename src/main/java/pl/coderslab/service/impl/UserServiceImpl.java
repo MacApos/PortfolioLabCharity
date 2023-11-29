@@ -1,12 +1,8 @@
 package pl.coderslab.service.impl;
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.coderslab.entity.CurrentUser;
-import pl.coderslab.entity.Role;
-import pl.coderslab.entity.TokenAvailability;
-import pl.coderslab.entity.User;
+import pl.coderslab.entity.*;
 import pl.coderslab.mapper.CustomerMapper;
 import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.UserRepository;
@@ -61,7 +57,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAllByRoles(roleName);
     }
 
-    public User addRole(String roleName, User user){
+    public User addRole(String roleName, User user) {
         Role role = roleRepository.findByName(roleName);
         HashSet<Role> roles = new HashSet<>();
         roles.add(role);
@@ -78,7 +74,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(1);
+        user.setEnabled(UserAvailability.AVAILABLE);
         user.setDeleted(0);
         user = addRole("ROLE_USER", user);
         userRepository.save(user);
@@ -99,15 +95,15 @@ public class UserServiceImpl implements UserService {
         if (currentUser.getUser().getId().equals(user.getId())) {
             return;
         }
-        user.setEnabled(0);
+        user.setEnabled(UserAvailability.UNAVAILABLE);
         user.setDeleted(1);
         userRepository.save(user);
     }
 
     @Override
-    public void blockById(Long id) {
+    public void enableUser(Long id, UserAvailability enabled) {
         User user = findById(id);
-        user.setEnabled(0);
+        user.setEnabled(enabled);
         userRepository.save(user);
     }
 
