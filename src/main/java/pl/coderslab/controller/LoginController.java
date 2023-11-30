@@ -4,25 +4,20 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.entity.CurrentUser;
-import pl.coderslab.entity.Role;
 import pl.coderslab.entity.User;
-import pl.coderslab.security.SpringDataUserDetailsService;
-import pl.coderslab.service.UserService;
+import pl.coderslab.service.DonationService;
 
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Stream;
+import java.lang.reflect.Field;
 
 @Controller
 public class LoginController {
-    private final UserService userService;
+    private final DonationService donationService;
+    private CurrentUser currentUser;
 
-    public LoginController(UserService userService) {
-        this.userService = userService;
+    public LoginController(DonationService donationService) {
+        this.donationService = donationService;
     }
 
     @GetMapping("/login")
@@ -34,9 +29,19 @@ public class LoginController {
 
     @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("/welcome-page")
-    public String showUserPage(@AuthenticationPrincipal CurrentUser customUser, Model model) {
-        User user = customUser.getUser();
-        model.addAttribute("user", user);
+    public String showWelcomePage(@AuthenticationPrincipal CurrentUser currentUser,
+                                  Model model) {
+        boolean enabled = currentUser.isEnabled();
+        boolean enabled1 = currentUser.enabled;
+//
+//        User user = currentUser.getUser();
+//
+//
+//        int countDonations = donationService.count(user);
+//        int sumBagsQuantity = donationService.sumBagsQuantity(user);
+//        model.addAttribute("user", user);
+//        model.addAttribute("countDonations", countDonations);
+//        model.addAttribute("sumBagsQuantity", sumBagsQuantity);
         return "welcomePage";
     }
 }

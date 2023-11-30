@@ -10,7 +10,7 @@
 
 <body>
 <header class="header--main-page">
-    <jsp:include page="headerUserPage.jsp"/>
+    <jsp:include page="header.jsp"/>
     <div class="slogan container container--85">
         <div class="slogan--item">
             <h2>

@@ -14,7 +14,12 @@ import java.util.Optional;
 @Repository
 public interface DonationRepository extends JpaRepository<Donation, Long> {
     @Query("SELECT SUM(d.quantity) FROM Donation d")
-    Integer sumBagsQuantity();
+    Integer sumAllBagsQuantity();
+
+    @Query("SELECT SUM(d.quantity) FROM Donation d WHERE d.user=?1")
+    Integer sumAllBagsQuantity(User user);
+
+    long countAllByUser(User user);
 
     Optional<Donation> findByIdAndDeleted(Long id, Deleted deleted);
 

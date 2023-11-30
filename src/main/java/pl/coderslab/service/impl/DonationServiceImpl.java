@@ -2,10 +2,7 @@ package pl.coderslab.service.impl;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import pl.coderslab.entity.Deleted;
-import pl.coderslab.entity.Donation;
-import pl.coderslab.entity.Status;
-import pl.coderslab.entity.User;
+import pl.coderslab.entity.*;
 import pl.coderslab.repository.DonationRepository;
 import pl.coderslab.service.DonationService;
 
@@ -20,13 +17,24 @@ public class DonationServiceImpl implements DonationService {
     }
 
     @Override
-    public int count() {
-        return (int) donationRepository.count();
+    public int count(User user) {
+        long count;
+        if (user == null) {
+            count = donationRepository.count();
+        } else {
+            count = donationRepository.countAllByUser(user);
+        }
+        return (int) count;
     }
 
     @Override
-    public int sumBagsQuantity() {
-        Integer sumBagsQuantity = donationRepository.sumBagsQuantity();
+    public int sumBagsQuantity(User user) {
+        Integer sumBagsQuantity;
+        if (user == null) {
+            sumBagsQuantity = donationRepository.sumAllBagsQuantity();
+        } else {
+            sumBagsQuantity = donationRepository.sumAllBagsQuantity(user);
+        }
         if (sumBagsQuantity == null) {
             return 0;
         }

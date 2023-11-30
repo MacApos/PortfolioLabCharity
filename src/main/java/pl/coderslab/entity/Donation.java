@@ -42,7 +42,8 @@ public class Donation {
     private User user;
 
     @NotNull
-    private Deleted deleted;
+    @Column(columnDefinition = "integer default 0")
+    private Deleted deleted = Deleted.AVAILABLE;
 
     @Column(nullable = false)
     @NotNull

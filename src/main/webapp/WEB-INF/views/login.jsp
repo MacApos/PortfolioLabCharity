@@ -9,7 +9,7 @@
 
 <body>
 <header>
-    <jsp:include page="headerUserPage.jsp"/>
+    <jsp:include page="header.jsp"/>
 </header>
 
 <section class="login-page">

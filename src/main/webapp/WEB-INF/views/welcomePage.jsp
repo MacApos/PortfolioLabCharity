@@ -9,7 +9,7 @@
 
 <body>
 <header class="header--main-page">
-    <jsp:include page="headerUserPage.jsp"/>
+    <jsp:include page="header.jsp"/>
 
     <div class="slogan container container--90">
         <div class="slogan--item">
@@ -34,7 +34,7 @@
 <section class="stats" id="stats">
     <div class="container container--85">
         <div class="stats--item">
-            <em>0</em>
+            <em>${sumBagsQuantity}</em>
 
             <h3>Oddanych worków</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius est beatae, quod accusamus illum
@@ -42,7 +42,7 @@
         </div>
 
         <div class="stats--item">
-            <em>0</em>
+            <em>${countDonations}</em>
             <h3>Przekazanych darów</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam magnam, sint nihil cupiditate quas
                 quam.</p>

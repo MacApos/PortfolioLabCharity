@@ -9,7 +9,8 @@
     <ul class="nav--actions">
         <sec:authorize access="hasRole('ADMIN')">
             <li class="logged-user">
-                Witaj <sec:authentication property="principal.username"/>
+                Witaj <sec:authentication property="principal.username"/><br>
+<%--                <sec:authentication property="principal"/>--%>
                 <ul class="dropdown">
                     <li><a href="${pageContext.request.contextPath}/show-institutions">Lista fundacji</a></li>
                     <li><a href="${pageContext.request.contextPath}/show-admins">Lista adminów</a></li>

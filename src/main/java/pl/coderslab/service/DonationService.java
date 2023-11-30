@@ -1,5 +1,6 @@
 package pl.coderslab.service;
 
+import pl.coderslab.entity.CurrentUser;
 import pl.coderslab.entity.Donation;
 import pl.coderslab.entity.User;
 
@@ -14,8 +15,8 @@ public interface DonationService {
 
     void deleteById(Long id);
 
-    int count();
+    int count(User user);
 
-    int sumBagsQuantity();
+    int sumBagsQuantity(User user);
 
 }
