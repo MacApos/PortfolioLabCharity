@@ -211,22 +211,24 @@ document.addEventListener("DOMContentLoaded", function () {
     showEmailMessage();
 
     const select = document.querySelector("select[name='email']");
-    const form2 = findRelatedElement(select, "form-text");
-    form2.addEventListener("submit", function(event){
-        console.log(select.checkValidity())
-    })
-
-    const input = form2.querySelector("input");
-    const id = form2.querySelector("#id");
-    console.log(form2);
-
-    Array.from(select.children).forEach(function (option){
-        option.addEventListener("click", function (event){
-            console.log(this.previousElementSibling);
-            input.value = this.previousElementSibling.value;
-            id.value = this.nextElementSibling.value;
+    if (select !== null) {
+        const form2 = findRelatedElement(select, "form-text");
+        form2.addEventListener("submit", function (event) {
+            console.log(select.checkValidity())
         })
-    })
+
+        const input = form2.querySelector("input");
+        const id = form2.querySelector("#id");
+        console.log(form2);
+
+        Array.from(select.children).forEach(function (option) {
+            option.addEventListener("click", function (event) {
+                console.log(this.previousElementSibling);
+                input.value = this.previousElementSibling.value;
+                id.value = this.nextElementSibling.value;
+            })
+        })
+    }
 
     function showEmailMessage() {
         for (const elementNodeListOfElement of document.querySelectorAll("#myModal")) {

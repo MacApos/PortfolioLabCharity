@@ -48,13 +48,13 @@ public class UserController {
 
     @RequestMapping("/block-user")
     public String blockUser(@RequestParam Long id) {
-        userService.enableUser(id, UserAvailability.UNAVAILABLE);
+        userService.enableUser(id, UserAvailability.UNABLED);
         return "redirect:/show-users";
     }
 
     @RequestMapping("/unblock-user")
     public String unblockUser(@RequestParam Long id) {
-        userService.enableUser(id, UserAvailability.AVAILABLE);
+        userService.enableUser(id, UserAvailability.ENABLED);
         return "redirect:/show-users";
     }
 

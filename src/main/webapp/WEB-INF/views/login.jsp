@@ -3,6 +3,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<fmt:setBundle basename="messages_pl"/>
+<fmt:message key="message.password" var="noPass"/>
+<fmt:message key="message.username" var="noUser"/>
 <!DOCTYPE html>
 <html lang="pl">
 <jsp:include page="head.jsp"/>
@@ -16,17 +19,28 @@
     <h2>Zaloguj się</h2>
     <form:form modelAttribute="user" method="post" novalidate="validate">
         <div class="form-group">
-            <form:input path="email" placeholder="Email" cssClass="form-control" required="true" minLength="3"
-                        value="u1326546@gmail.com"/>
-            <form:errors path="email" element="div" cssClass="error-div"/>
+            <input name="email" placeholder="Email" class="form-control" required="required" minLength="3"
+                   value="u1326546@gmail.com"/>
+<%--                                   value="${user.email}"/>--%>
             <div class="invalid-feedback">
-                Podany adres email nie został znaleziony.
+                Podaj poprawny adres email.
             </div>
+            <c:if test="${param.error == true}">
+                <div class="error-div">
+                    Nieprawidłowy adres email lub hasło.
+                </div>
+            </c:if>
+
+            <c:if test="${enabled=='UNABLED'}">
+                <div class="error-div">
+                    Twoje konto zostało zablokowane.
+                </div>
+            </c:if>
         </div>
         <div class="form-group">
-            <form:input path="password" type="password" placeholder="Nowe hasło" required="false" minLength="3"
-                        value="H@slo123"/>
-            <form:errors path="password" element="div" cssClass="error-div"/>
+            <input name="password" type="password" placeholder="Hasło" required="required" minLength="3"
+                   value="H@slo123"/>
+
             <div class="invalid-feedback">
                 Podaj poprawne hasło.
             </div>
@@ -44,5 +58,13 @@
 </section>
 
 <jsp:include page="footer.jsp"/>
+<script src="webjars/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(function () {
+        $("input[name='email']").on("input", function () {
+            $("div.error-div").hide();
+        })
+    })
+</script>
 </body>
 </html>

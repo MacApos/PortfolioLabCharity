@@ -14,47 +14,48 @@
     <div class="slogan container container--90">
         <div class="slogan--item">
             <div class="form-text">
+                <c:choose>
+                <c:when test="${empty users}">
+                    <h1 class="no-decoration">
+                        Brak użytkowników
+                    </h1>
+                </c:when>
+                <c:otherwise>
                 <h2>
                     Lista użytkowników
                 </h2>
                 <ol>
                     <div class="wrapper">
-                        <c:choose>
-                            <c:when test="${empty users}">
-                                <h1 class="no-decoration">
-                                    Brak użytkowników
-                                </h1>
-                            </c:when>
-                            <c:otherwise>
-                                <c:forEach items="${users}" var="user">
-                                    <li>
-                                        <div class="content">
-                                            <div>
-                                                    ${user.username}<br>
-                                                    ${user.email}<br>
-                                            </div>
-                                            <div class="form-group form-group--buttons sidebar">
-                                                <c:choose>
-                                                    <c:when test="${user.enabled.ordinal()==1}">
-                                                        <a href="${pageContext.request.contextPath}/edit-user?id=${user.id}"
-                                                           class="btn btn--highlighted" type="submit">Edytuj</a>
-                                                        <a href="${pageContext.request.contextPath}/delete-user?id=${user.id}"
-                                                           class="btn btn--highlighted" type="submit">Usuń</a>
-                                                        <a href="${pageContext.request.contextPath}/block-user?id=${user.id}"
-                                                           class="btn btn--highlighted" type="submit">Zablokuj</a>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <a href="${pageContext.request.contextPath}/unblock-user?id=${user.id}"
-                                                           class="btn btn--highlighted" type="submit">Odblokuj</a>
-                                                        <a href="${pageContext.request.contextPath}/delete-user?id=${user.id}"
-                                                           class="btn btn--highlighted" type="submit">Usuń</a>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </c:forEach>
-                            </c:otherwise>
+
+                        <c:forEach items="${users}" var="user">
+                            <li>
+                                <div class="content">
+                                    <div>
+                                            ${user.username}<br>
+                                            ${user.email}<br>
+                                    </div>
+                                    <div class="form-group form-group--buttons sidebar">
+                                        <c:choose>
+                                            <c:when test="${user.enabled.ordinal()==1}">
+                                                <a href="${pageContext.request.contextPath}/edit-user?id=${user.id}"
+                                                   class="btn btn--highlighted" type="submit">Edytuj</a>
+                                                <a href="${pageContext.request.contextPath}/delete-user?id=${user.id}"
+                                                   class="btn btn--highlighted" type="submit">Usuń</a>
+                                                <a href="${pageContext.request.contextPath}/block-user?id=${user.id}"
+                                                   class="btn btn--highlighted" type="submit">Zablokuj</a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a href="${pageContext.request.contextPath}/unblock-user?id=${user.id}"
+                                                   class="btn btn--highlighted" type="submit">Odblokuj</a>
+                                                <a href="${pageContext.request.contextPath}/delete-user?id=${user.id}"
+                                                   class="btn btn--highlighted" type="submit">Usuń</a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </div>
+                            </li>
+                        </c:forEach>
+                        </c:otherwise>
                         </c:choose>
                     </div>
                 </ol>

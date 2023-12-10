@@ -11,6 +11,8 @@ import pl.coderslab.validator.groups.Authentication;
 import pl.coderslab.validator.groups.NewPassword;
 import pl.coderslab.validator.groups.PasswordReset;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class PasswordResetController {
     private final UserService userService;
@@ -27,12 +29,12 @@ public class PasswordResetController {
 
     @PostMapping("/password-reset")
     public String processPasswordResetForm(@Validated({PasswordReset.class}) User user, BindingResult result,
-                                           Model model) {
+                                           Model model, HttpServletRequest request) {
         model.addAttribute("user", user);
         if (result.hasErrors()) {
             return "passwordReset";
         }
-        userService.generateAndEmailToken(user);
+        userService.generateAndEmailToken(user, request);
         model.addAttribute("showEmailMessage", true);
         return "passwordReset";
     }

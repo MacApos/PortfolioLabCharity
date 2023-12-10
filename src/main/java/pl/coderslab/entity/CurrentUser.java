@@ -7,7 +7,6 @@ import java.util.Collection;
 
 public class CurrentUser extends User {
     private final pl.coderslab.entity.User user;
-    public boolean enabled;
 
     public CurrentUser(String username, String password, Collection<? extends GrantedAuthority> authorities,
                        pl.coderslab.entity.User user) {
@@ -15,14 +14,7 @@ public class CurrentUser extends User {
         this.user = user;
     }
 
-
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public pl.coderslab.entity.User getUser(){
+    public pl.coderslab.entity.User getUser() {
         return user;
     }
-
 }

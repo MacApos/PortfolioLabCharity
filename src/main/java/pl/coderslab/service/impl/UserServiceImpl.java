@@ -2,10 +2,12 @@ package pl.coderslab.service.impl;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import pl.coderslab.entity.*;
 import pl.coderslab.mapper.CustomerMapper;
 import pl.coderslab.repository.RoleRepository;
 import pl.coderslab.repository.UserRepository;
+import pl.coderslab.service.DonationService;
 import pl.coderslab.service.EmailService;
 import pl.coderslab.service.UserService;
 
@@ -17,18 +19,19 @@ import java.util.*;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final DonationService donationService;
     private final EmailService emailService;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final HttpServletRequest request;
     private final CustomerMapper mapper;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, EmailService emailService,
-                           BCryptPasswordEncoder passwordEncoder, HttpServletRequest request, CustomerMapper mapper) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,
+                           DonationService donationService, EmailService emailService,
+                           BCryptPasswordEncoder passwordEncoder, CustomerMapper mapper) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.donationService = donationService;
         this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
-        this.request = request;
         this.mapper = mapper;
     }
 
@@ -74,7 +77,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(UserAvailability.AVAILABLE);
+        user.setEnabled(UserAvailability.ENABLED);
         user.setDeleted(0);
         user = addRole("ROLE_USER", user);
         userRepository.save(user);
@@ -95,7 +98,7 @@ public class UserServiceImpl implements UserService {
         if (currentUser.getUser().getId().equals(user.getId())) {
             return;
         }
-        user.setEnabled(UserAvailability.UNAVAILABLE);
+        user.setEnabled(UserAvailability.ENABLED);
         user.setDeleted(1);
         userRepository.save(user);
     }
@@ -118,7 +121,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void generateAndEmailToken(User user) {
+    public String processLoginForm(boolean error, User user, Model model) {
+        model.addAttribute("user", user);
+        if (!error) {
+            User exisitingUser = findByEmail(user.getEmail());
+            UserAvailability availability = exisitingUser.getEnabled();
+            if (availability == UserAvailability.ENABLED) {
+                return "redirect:welcome-page";
+            }
+            model.addAttribute("enabled", availability);
+        }
+        return "login";
+    }
+
+    @Override
+    public void showWelcomePage(CurrentUser currentUser, Model model) {
+
+    }
+
+    @Override
+    public void generateAndEmailToken(User user, HttpServletRequest request) {
         String email = user.getEmail();
         User existingUser = findByEmail(email);
         String token = UUID.randomUUID().toString();

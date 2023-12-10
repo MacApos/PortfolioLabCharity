@@ -52,10 +52,10 @@ public class RegisterController {
             model.addAttribute("emailExists", "Adres email już istnieje.");
             invalidFeedback = false;
         }
-        if (!password.equals(confirmPassword)) {
-            model.addAttribute("differentPasswords", "Hasła nie są takie same.");
-            invalidFeedback = false;
-        }
+//        if (!password.equals(confirmPassword)) {
+//            model.addAttribute("differentPasswords", "Hasła nie są takie same.");
+//            invalidFeedback = false;
+//        }
         if (result.hasErrors()) {
             invalidFeedback = false;
         }

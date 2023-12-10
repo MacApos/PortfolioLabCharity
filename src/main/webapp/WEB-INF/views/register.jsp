@@ -49,17 +49,12 @@
             </div>
         </div>
         <div class="form-group">
-            <input type="password" name="password2" required placeholder="Powtórz hasło" value="H@slo123" />
-            <c:choose>
-                <c:when test="${not empty differentPasswords}">
-                    <div class="invalid-feedback">
-                            ${differentPasswords}
-                    </div>
-                </c:when>
-                <c:otherwise>
-                    <div class="invalid-feedback">Potwierdź hasło.</div>
-                </c:otherwise>
-            </c:choose>
+            <form:input path="passwordConfirmation" type="password" placeholder="Powtórz hasło" required="true"
+                        minLength="3" value="H@slo123"/>
+            <form:errors id="${user.id}" element="div" cssClass="error-div"/>
+            <div class="invalid-feedback">
+                Podaj poprawne hasło.
+            </div>
         </div>
         <div class="form-group form-group--buttons">
             <a href="${pageContext.request.contextPath}/login" class="btn btn--without-border">Zaloguj się</a>

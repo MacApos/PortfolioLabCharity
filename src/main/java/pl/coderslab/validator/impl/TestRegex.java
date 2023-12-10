@@ -1,12 +1,20 @@
 package pl.coderslab.validator.impl;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class TestRegex {
     public static void main(String[] args) {
+        System.out.println(Calendar.getInstance().getTime());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        dtf.format(now);
+
 //        Street
         Pattern streetPattern = Pattern.compile(
                 "\\d{1,4} \\p{Lu}*\\p{Ll}+" +   //np. 3 Maja

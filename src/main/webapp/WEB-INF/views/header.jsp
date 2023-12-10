@@ -9,8 +9,7 @@
     <ul class="nav--actions">
         <sec:authorize access="hasRole('ADMIN')">
             <li class="logged-user">
-                Witaj <sec:authentication property="principal.username"/><br>
-<%--                <sec:authentication property="principal"/>--%>
+                Witaj ${loggedUser.username}
                 <ul class="dropdown">
                     <li><a href="${pageContext.request.contextPath}/show-institutions">Lista fundacji</a></li>
                     <li><a href="${pageContext.request.contextPath}/show-admins">Lista adminów</a></li>
@@ -26,7 +25,7 @@
         </sec:authorize>
         <sec:authorize access="hasRole('USER')">
             <li class="logged-user">
-                Witaj <sec:authentication property="principal.username"/>
+                Witaj ${loggedUser.username}
                 <ul class="dropdown">
                     <li><a href="${pageContext.request.contextPath}/welcome-page">Profil</a></li>
                     <li><a href="${pageContext.request.contextPath}/show-donations">Lista darowizn</a></li>
