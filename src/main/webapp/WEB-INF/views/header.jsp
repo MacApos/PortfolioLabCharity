@@ -27,7 +27,7 @@
             <li class="logged-user">
                 Witaj ${loggedUser.username}
                 <ul class="dropdown">
-                    <li><a href="${pageContext.request.contextPath}/welcome-page">Profil</a></li>
+                    <li><a href="${pageContext.request.contextPath}/edit-my-profile">Edytuj profil</a></li>
                     <li><a href="${pageContext.request.contextPath}/show-donations">Lista darowizn</a></li>
                     <li><a href="${pageContext.request.contextPath}/welcome-page#stats">Moje zbiórki</a></li>
                     <li>

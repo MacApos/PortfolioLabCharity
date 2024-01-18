@@ -25,7 +25,7 @@
                 </div>
             </c:if>
             <div class="invalid-feedback">
-                Podaj poprawną nazwę użytkownika.
+                Podaj poprawną nazwę.
             </div>
         </div>
         <div class="form-group">
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="form-group">
-            <form:input path="password" type="password" placeholder="Hasło" required="true" minLength="3" value="H@slo123"/>
+            <form:input path="password" type="password" placeholder="Hasło" required="true" minLength="3"/>
             <form:errors path="password" element="div" cssClass="error-div"/>
             <div class="invalid-feedback">
                 Podaj poprawne hasło.
@@ -50,12 +50,13 @@
         </div>
         <div class="form-group">
             <form:input path="passwordConfirmation" type="password" placeholder="Powtórz hasło" required="true"
-                        minLength="3" value="H@slo123"/>
+                        minLength="3"/>
             <form:errors id="${user.id}" element="div" cssClass="error-div"/>
             <div class="invalid-feedback">
                 Podaj poprawne hasło.
             </div>
         </div>
+
         <div class="form-group form-group--buttons">
             <a href="${pageContext.request.contextPath}/login" class="btn btn--without-border">Zaloguj się</a>
             <button class="btn" type="submit">Załóż konto</button>

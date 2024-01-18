@@ -16,7 +16,7 @@ import java.util.Set;
 @Entity
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"username", "deleted"}),
         @UniqueConstraint(columnNames = {"email", "deleted"})})
-@PasswordConfirmed(groups = {Registration.class, NewPassword.class})
+@PasswordConfirmed(groups = {Registration.class, NewPassword.class, EditUser.class})
 @EmailAlreadyExists(groups = {Registration.class, EditUser.class})
 @UserIsAlreadyAdmin(groups = NewAdmin.class)
 public class User {
@@ -35,22 +35,23 @@ public class User {
     @EmailNotFound(groups = {Login.class, PasswordReset.class, NewAdmin.class})
     private String email;
 
-    @NotNull(groups = {Registration.class, Login.class, NewPassword.class})
-    @NotBlank(groups = {Registration.class, Login.class, NewPassword.class})
-    @Size(min = 3, groups = {Registration.class, Login.class, NewPassword.class})
+    @NotNull(groups = {Registration.class, Login.class, NewPassword.class, EditUser.class})
+    @NotBlank(groups = {Registration.class, Login.class, NewPassword.class, EditUser.class})
+    @Size(min = 3, groups = {Registration.class, Login.class, NewPassword.class, EditUser.class})//min = 8
+    @Password(groups = {Registration.class, NewPassword.class, EditUser.class})
     private String password;
 
     @Transient
-    @NotNull(groups = {Registration.class, NewPassword.class})
-    @NotBlank(groups = {Registration.class, NewPassword.class})
-    @Size(min = 3, groups = {Registration.class, NewPassword.class})
+    @NotNull(groups = {Registration.class, NewPassword.class, EditUser.class})
+    @NotBlank(groups = {Registration.class, NewPassword.class, EditUser.class})
+    @Size(min = 3, groups = {Registration.class, NewPassword.class, EditUser.class})
     private String passwordConfirmation;
 
     @NotNull
     private UserAvailability enabled;
 
     @NotNull
-    private int deleted;
+    private Deleted deleted;
 
     @NotNull(groups = Authentication.class)
     @NotBlank(groups = Authentication.class)
@@ -149,11 +150,11 @@ public class User {
         this.tokenDate = tokenDate;
     }
 
-    public int getDeleted() {
+    public Deleted getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(int deleted) {
+    public void setDeleted(Deleted deleted) {
         this.deleted = deleted;
     }
 

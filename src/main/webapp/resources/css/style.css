@@ -866,7 +866,7 @@ h2:after {
 
 .form-text {
     font-size: 2rem;
-    line-height: 2em;
+    line-height: 1.5em;
 }
 
 form .edit-form .form-section--column .form-group label textarea,
@@ -901,7 +901,7 @@ form .edit-form .form-section--column .form-group label select {
 }
 
 .form-text h2 {
-    margin-top:0;
+    margin-top: 0;
     margin-bottom: 0;
 }
 
@@ -910,6 +910,30 @@ form .edit-form .form-section--column .form-group label select {
     display: grid;
     grid-auto-rows: 1fr;
     gap: 10px;
+}
+
+.wrapper2 {
+    margin: auto;
+    display: grid;
+    grid-auto-rows: 1fr;
+    align-items: center;
+}
+
+.flex-label {
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-label div:first-child {
+    line-height: 1.5em;
+}
+
+.flex-label input {
+    flex-shrink: 0;
+    flex-grow: 0;
 }
 
 .wrapper > a:last-child {
@@ -928,11 +952,11 @@ form .edit-form .form-section--column .form-group label select {
 }
 
 /*.content > div:first-child {*/
-    /*display: flex;*/
-    /*flex-grow: 1;*/
-    /*min-width: 350px;*/
-    /*flex-shrink: 1;*/
-    /*flex-basis: 350px;*/
+/*display: flex;*/
+/*flex-grow: 1;*/
+/*min-width: 350px;*/
+/*flex-shrink: 1;*/
+/*flex-basis: 350px;*/
 /*}*/
 
 :root {
@@ -955,7 +979,7 @@ form .edit-form .form-section--column .form-group label select {
 }
 
 @container (max-width:475px) {
-    .sidebar{
+    .sidebar {
         justify-content: center;
         flex-basis: 100%;
     }
@@ -1091,6 +1115,12 @@ form .form-group {
     margin-bottom: 20px;
 }
 
+form .form-group h4 {
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
 /* line 10, scss/modules/_forms.scss */
 form .form-group input:not([type="checkbox"]):not([type="radio"]),
 form .form-group textarea,
@@ -1141,6 +1171,10 @@ form .form-group--inline label {
 form .form-group--inline label input {
     margin-left: 15px;
 }
+
+/*form .form-group--inline label h4 {*/
+/*    margin-left: 15px;*/
+/*}*/
 
 /* line 49, scss/modules/_forms.scss */
 form .form-group--checkbox {
@@ -1294,6 +1328,10 @@ form .form-group--dropdown ul li:last-of-type {
 }
 
 /* line 173, scss/modules/_forms.scss */
+form .form-section {
+
+}
+
 form .form-section h4 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
@@ -1328,7 +1366,7 @@ form .form-section--columns {
 
 /* line 193, scss/modules/_forms.scss */
 form .form-section--columns > div {
-    padding-right: 20px;
+    /*padding-right: 20px;*/
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
@@ -1336,7 +1374,7 @@ form .form-section--columns > div {
 
 /* line 197, scss/modules/_forms.scss */
 form .form-section--columns > div:last-of-type {
-    padding-right: 0;
+    /*padding-right: 0;*/
 }
 
 /* line 203, scss/modules/_forms.scss */

@@ -2,7 +2,6 @@ package pl.coderslab.validator.impl;
 
 import pl.coderslab.entity.User;
 import pl.coderslab.validator.PasswordConfirmed;
-import pl.coderslab.validator.Street;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -17,6 +16,7 @@ public class PasswordConfirmedValidator implements ConstraintValidator<PasswordC
         if (user == null) {
             return true;
         }
+
        return user.getPasswordConfirmation().equals(user.getPassword());
     }
 }

@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(UserAvailability.ENABLED);
-        user.setDeleted(0);
+        user.setDeleted(Deleted.AVAILABLE);
         user = addRole("ROLE_USER", user);
         userRepository.save(user);
     }
@@ -86,8 +86,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) {
         User existingUser = findById(user.getId());
-        user.setEnabled(existingUser.getEnabled());
-        user.setDeleted(existingUser.getDeleted());
         mapper.updateUser(user, existingUser);
         userRepository.save(existingUser);
     }
@@ -99,7 +97,7 @@ public class UserServiceImpl implements UserService {
             return;
         }
         user.setEnabled(UserAvailability.ENABLED);
-        user.setDeleted(1);
+        user.setDeleted(Deleted.DELETED);
         userRepository.save(user);
     }
 

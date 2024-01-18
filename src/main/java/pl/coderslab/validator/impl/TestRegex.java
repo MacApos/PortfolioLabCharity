@@ -2,13 +2,21 @@ package pl.coderslab.validator.impl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class TestRegex {
+    public static boolean findMatch(String regex, String input) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(input);
+        return !matcher.find();
+    }
+
     public static void main(String[] args) {
         System.out.println(Calendar.getInstance().getTime());
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -45,5 +53,29 @@ public class TestRegex {
         String city = "Zielona Góra";
         Matcher cityMatcher = cityPattern.matcher(city);
         System.out.println(city + "\n" + cityMatcher.matches());
+
+
+//        Password
+        String password = "H\"-slo123";
+        List<String> results = new ArrayList<>();
+        if (password.length() < 8) {
+            results.add("Too short");
+        }
+        if (findMatch("\\p{Lu}+", password)) {
+            results.add("No capital letters");
+        }
+        if (findMatch("\\p{Ll}+", password)) {
+            results.add("No small letters");
+        }
+        if (findMatch("[!@#$%^&*()_\\-+={}\\[\\]|:;'`\"<,>\\\\.?/]", password)) {
+            results.add("No special characters");
+        }
+        if (findMatch("\\d", password)) {
+            results.add("No digit");
+        }
+        if (results.size() == 0) {
+            results.add("All good");
+        }
+        results.forEach(System.out::println);
     }
 }

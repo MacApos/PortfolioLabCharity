@@ -20,7 +20,7 @@
     <form:form modelAttribute="user" method="post" novalidate="validate">
         <div class="form-group">
             <input name="email" placeholder="Email" class="form-control" required="required" minLength="3"
-                   value="u1326546@gmail.com"/>
+                   value="johnuser@gmail.com"/>
 <%--                                   value="${user.email}"/>--%>
             <div class="invalid-feedback">
                 Podaj poprawny adres email.
