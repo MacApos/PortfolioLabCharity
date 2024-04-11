@@ -1,6 +1,6 @@
 package pl.coderslab.validator;
 
-import pl.coderslab.validator.impl.EmailAlreadyExistsValidator;
+import pl.coderslab.validator.impl.PasswordConfirmedValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -9,11 +9,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Constraint(validatedBy = EmailAlreadyExistsValidator.class)
-@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
+@Constraint(validatedBy = PasswordConfirmedValidator.class)
+@Target({ElementType.TYPE_USE, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EmailAlreadyExists {
-    String message() default "Adres email już istnieje.";
+public @interface PasswordConfirmed {
+    String message() default "Hasła nie są takie same.";
 
     Class<?>[] groups() default {};
 
