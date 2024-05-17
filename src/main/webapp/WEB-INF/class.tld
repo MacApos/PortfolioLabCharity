@@ -9,7 +9,7 @@
     <tag>
         <description>Renders field errors wrapped in a specified tag.</description>
         <name>errors</name>
-        <tag-class>pl.coderslab.tags.CustomSpringFormErrorTag</tag-class>
+        <tag-class>pl.coderslab.tags.ClassLevelErrorsTag</tag-class>
         <body-content>JSP</body-content>
         <variable>
             <name-given>messages</name-given>

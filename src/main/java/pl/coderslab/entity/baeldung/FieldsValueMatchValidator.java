@@ -1,4 +1,4 @@
-package pl.coderslab.entity;
+package pl.coderslab.entity.baeldung;
 
 import org.springframework.beans.BeanWrapperImpl;
 

@@ -5,7 +5,7 @@ import pl.coderslab.validator.EmailAndPassword;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class EmailAlreadyExistsValidator implements ConstraintValidator<EmailAndPassword, Object> {
+public class EmailAndPasswordValidator implements ConstraintValidator<EmailAndPassword, Object> {
     private String firstField;
     private String secondField;
 

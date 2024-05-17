@@ -1,4 +1,4 @@
-package pl.coderslab.entity;
+package pl.coderslab.entity.baeldung;
 
 @FieldsValueMatch.List({@FieldsValueMatch(field = "password", fieldMatch = "verifyPassword", message = "Passwords do not match!"), @FieldsValueMatch(field = "email", fieldMatch = "verifyEmail", message = "Email addresses do not match!")})
 public class NewUserForm {

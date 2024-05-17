@@ -48,6 +48,9 @@
                         </div>
                     </div>
                 </div>
+                <form:hidden path="id"/>
+                <form:hidden path="deleted"/>
+                <form:hidden path="enabled"/>
             </form:form>
         </div>
     </div>

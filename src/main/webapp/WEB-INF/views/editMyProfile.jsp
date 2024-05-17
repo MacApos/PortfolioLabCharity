@@ -22,8 +22,10 @@
                         <div class="form-group form-group--inline">
                             <label>
                                 <div>Nazwa</div>
-                                <form:input path="username" placeholder="Nazwa użytkownika" required="true"
-                                            minlength="3"/>
+                                <form:input path="username" placeholder="Nazwa użytkownika"  />
+<%--                                            required="true"--%>
+<%--                                            minlength="3"--%>
+
                                 <form:errors path="username" element="div" cssClass="error-div"/>
                                 <div class="invalid-feedback">
                                     Podaj poprawną nazwę.
@@ -43,24 +45,33 @@
                             </label>
                         </div>
                         <div class="form-group form-group--inline">
-                            <label>
-                                <div>Hasło</div>
-                                <form:input path="password" type="password" placeholder="Nowe hasło" minLength="3"/>
-                                <form:errors path="password" element="div" cssClass="error-div"/>
-                                <div class="invalid-feedback">
-                                    Podaj poprawne hasło.
-                                </div>
+                            <label for="passwordCheck">
+                                <div>Edytuj<br> hasło</div>
+                                <input type="checkbox" id="passwordCheck" name="passwordCheck"/>
                             </label>
                         </div>
-                        <div class="form-group form-group--inline">
-                            <label>
-                                Powtórz<br>hasło</br>
-                                <form:input path="passwordConfirmation" type="password" placeholder="Powtórz hasło" minLength="3"/>
-                                <form:errors id="${user.id}" element="div" cssClass="error-div"/>
-                                <div class="invalid-feedback">
-                                    Podaj poprawne hasło.
-                                </div>
-                            </label>
+                        <div id="editPassword">
+                            <div class="form-group form-group--inline">
+                                <label>
+                                    <div>Hasło</div>
+                                    <form:input path="password" type="password" placeholder="Nowe hasło" minLength="3"/>
+                                    <form:errors path="password" element="div" cssClass="error-div"/>
+                                    <div class="invalid-feedback">
+                                        Podaj poprawne hasło.
+                                    </div>
+                                </label>
+                            </div>
+                            <div class="form-group form-group--inline">
+                                <label>
+                                    Powtórz<br>hasło</br>
+                                    <form:input path="passwordConfirmation" type="password" placeholder="Powtórz hasło"
+                                                minLength="3" />
+                                    <form:errors id="${user.id}" element="div" cssClass="error-div"/>
+                                    <div class="invalid-feedback">
+                                        Podaj poprawne hasło.
+                                    </div>
+                                </label>
+                            </div>
                         </div>
                         <div class="form-group form-group--buttons">
                             <a href="${pageContext.request.contextPath}/show-users"
@@ -80,10 +91,17 @@
 <jsp:include page="footer.jsp"/>
 <script src="webjars/jquery/1.9.1/jquery.min.js"></script>
 <script>
-    $(function () {
-        // $("input[name='password']")[0].value = "";
-        // $("input[name='password']").innerHTML = "";
-    })
+
+    $(document).ready($(function () {
+        let editPassword = $("div[id='editPassword']")[0];
+        $("input[id='passwordCheck").click(function () {
+            if (this.checked) {
+                editPassword.style.display = "block"
+            } else {
+                editPassword.style.display = "none"
+            }
+        });
+    }))
 </script>
 </body>
 </html>

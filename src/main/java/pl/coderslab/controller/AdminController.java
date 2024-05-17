@@ -13,6 +13,7 @@ import pl.coderslab.service.UserService;
 import pl.coderslab.validator.groups.EditUser;
 import pl.coderslab.validator.groups.NewAdmin;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -37,7 +38,7 @@ public class AdminController {
     }
 
     @PostMapping("/edit-admin")
-    public String processEditAdminForm(@Validated({EditUser.class}) User admin, BindingResult result, Model model) {
+    public String processEditAdminForm(@Valid User admin, BindingResult result, Model model) {
         model.addAttribute("user", admin);
         if (result.hasErrors()) {
             return "editUser";

@@ -2,6 +2,7 @@ package pl.coderslab.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.lang.Nullable;
 import pl.coderslab.validator.*;
 import pl.coderslab.validator.groups.*;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -17,7 +19,7 @@ import java.util.Set;
 @Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"username", "deleted"}),
         @UniqueConstraint(columnNames = {"email", "deleted"})})
 @PasswordConfirmed(groups = {Registration.class, NewPassword.class, EditUser.class})
-@EmailAlreadyExists(groups = {Registration.class, EditUser.class})
+@EmailAndPassword(groups = {Registration.class, EditUser.class}, firstField = "", secondField = "")
 @UserIsAlreadyAdmin(groups = NewAdmin.class)
 public class User {
     @Id
@@ -30,20 +32,20 @@ public class User {
 
     @Column(nullable = false, length = 60)
     @Email(groups = {Registration.class, EditUser.class})
-//    @NotNull(groups = {Registration.class, EditUser.class})
+    @NotNull(groups = {Registration.class, EditUser.class})
     @NotBlank(groups = {Registration.class, EditUser.class})
     @EmailNotFound(groups = {Login.class, PasswordReset.class, NewAdmin.class})
     private String email;
 
-    @NotNull(groups = {Registration.class, Login.class, NewPassword.class, EditUser.class})
-    @NotBlank(groups = {Registration.class, Login.class, NewPassword.class, EditUser.class})
-    @Size(min = 3, groups = {Registration.class, Login.class, NewPassword.class, EditUser.class})//min = 8
+        @NotNull(groups = {Registration.class, Login.class, NewPassword.class})//, EditUser.class})
+    @NotBlank(groups = {Registration.class, Login.class, NewPassword.class})//, EditUser.class})
+        @Size(min = 3, groups = {Registration.class, Login.class, NewPassword.class})//min = 8
     @Password(groups = {Registration.class, NewPassword.class, EditUser.class})
     private String password;
 
     @Transient
-    @NotNull(groups = {Registration.class, NewPassword.class, EditUser.class})
-    @NotBlank(groups = {Registration.class, NewPassword.class, EditUser.class})
+    @NotNull(groups = {Registration.class, NewPassword.class})//, EditUser.class})
+    @NotBlank(groups = {Registration.class, NewPassword.class})//, EditUser.class})
     @Size(min = 3, groups = {Registration.class, NewPassword.class, EditUser.class})
     private String passwordConfirmation;
 

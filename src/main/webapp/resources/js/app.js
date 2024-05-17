@@ -318,10 +318,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (form.querySelector("input[type='radio']") !== null) {
                     setFeedbackForSelectableInputs(form, "radio");
                 }
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
+                // if (!form.checkValidity()) {
+                //     event.preventDefault();
+                //     event.stopPropagation();
+                // }
                 form.classList.add('was-validated');
                 console.log(form);
             }, false)

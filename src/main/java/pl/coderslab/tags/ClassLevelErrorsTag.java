@@ -7,7 +7,7 @@ import org.springframework.web.servlet.tags.form.TagWriter;
 import javax.servlet.jsp.JspException;
 
 
-public class CustomSpringFormErrorTag extends ErrorsTag {
+public class ClassLevelErrorsTag extends ErrorsTag {
     private boolean firstErrorOnly = true;
 
     public boolean isFirstErrorOnly() {
