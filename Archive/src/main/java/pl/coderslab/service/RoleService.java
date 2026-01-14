@@ -1,7 +1,7 @@
-package pl.coderslab.service;
+package pl.main.service;
 
-import pl.coderslab.entity.Category;
-import pl.coderslab.entity.Role;
+import pl.main.entity.Category;
+import pl.main.entity.Role;
 
 import java.util.List;
 

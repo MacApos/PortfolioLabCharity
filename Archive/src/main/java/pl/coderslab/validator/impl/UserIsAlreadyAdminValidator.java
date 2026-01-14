@@ -1,9 +1,9 @@
-package pl.coderslab.validator.impl;
+package pl.main.validator.impl;
 
-import pl.coderslab.entity.Role;
-import pl.coderslab.entity.User;
-import pl.coderslab.service.UserService;
-import pl.coderslab.validator.UserIsAlreadyAdmin;
+import pl.main.entity.Role;
+import pl.main.entity.User;
+import pl.main.service.UserService;
+import pl.main.validator.UserIsAlreadyAdmin;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

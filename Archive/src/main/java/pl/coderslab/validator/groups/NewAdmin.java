@@ -1,4 +1,4 @@
-package pl.coderslab.validator.groups;
+package pl.main.validator.groups;
 
 public interface NewAdmin {
 }

@@ -1,8 +1,8 @@
-package pl.coderslab.service;
+package pl.main.service;
 
-import pl.coderslab.entity.CurrentUser;
-import pl.coderslab.entity.Donation;
-import pl.coderslab.entity.User;
+import pl.main.entity.CurrentUser;
+import pl.main.entity.Donation;
+import pl.main.entity.User;
 
 import java.util.List;
 

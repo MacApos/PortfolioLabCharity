@@ -1,6 +1,6 @@
-package pl.coderslab.service;
+package pl.main.service;
 
-import pl.coderslab.entity.Category;
+import pl.main.entity.Category;
 
 import java.util.List;
 

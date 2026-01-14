@@ -1,4 +1,4 @@
-package pl.coderslab.security;
+package pl.main.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -6,9 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.coderslab.entity.CurrentUser;
-import pl.coderslab.entity.User;
-import pl.coderslab.service.UserService;
+import pl.main.entity.CurrentUser;
+import pl.main.entity.User;
+import pl.main.service.UserService;
 
 import java.util.HashSet;
 import java.util.Set;

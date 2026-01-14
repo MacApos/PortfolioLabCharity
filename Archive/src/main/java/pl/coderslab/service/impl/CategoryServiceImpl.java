@@ -1,9 +1,9 @@
-package pl.coderslab.service.impl;
+package pl.main.service.impl;
 
 import org.springframework.stereotype.Service;
-import pl.coderslab.entity.Category;
-import pl.coderslab.repository.CategoryRepository;
-import pl.coderslab.service.CategoryService;
+import pl.main.entity.Category;
+import pl.main.repository.CategoryRepository;
+import pl.main.service.CategoryService;
 
 import java.util.List;
 

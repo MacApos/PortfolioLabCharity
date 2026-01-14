@@ -1,4 +1,4 @@
-package pl.coderslab.controller;
+package pl.main.controller;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.coderslab.entity.*;
-import pl.coderslab.service.CategoryService;
-import pl.coderslab.service.DonationService;
-import pl.coderslab.service.InstitutionService;
+import pl.main.entity.*;
+import pl.main.service.CategoryService;
+import pl.main.service.DonationService;
+import pl.main.service.InstitutionService;
 
 import javax.validation.Valid;
 import java.util.List;

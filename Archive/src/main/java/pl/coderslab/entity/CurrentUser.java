@@ -1,4 +1,4 @@
-package pl.coderslab.entity;
+package pl.main.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -6,15 +6,15 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 
 public class CurrentUser extends User {
-    private final pl.coderslab.entity.User user;
+    private final pl.main.entity.User user;
 
     public CurrentUser(String username, String password, Collection<? extends GrantedAuthority> authorities,
-                       pl.coderslab.entity.User user) {
+                       pl.main.entity.User user) {
         super(username, password, authorities);
         this.user = user;
     }
 
-    public pl.coderslab.entity.User getUser() {
+    public pl.main.entity.User getUser() {
         return user;
     }
 }

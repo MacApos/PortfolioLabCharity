@@ -1,9 +1,9 @@
-package pl.coderslab.validator.impl;
+package pl.main.validator.impl;
 
-import pl.coderslab.entity.User;
-import pl.coderslab.service.UserService;
-import pl.coderslab.validator.EmailNotFound;
-import pl.coderslab.validator.Street;
+import pl.main.entity.User;
+import pl.main.service.UserService;
+import pl.main.validator.EmailNotFound;
+import pl.main.validator.Street;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

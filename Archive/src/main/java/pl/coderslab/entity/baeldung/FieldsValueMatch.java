@@ -1,4 +1,4 @@
-package pl.coderslab.entity.baeldung;
+package pl.main.entity.baeldung;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

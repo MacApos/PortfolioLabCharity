@@ -1,10 +1,10 @@
-package pl.coderslab.service.impl;
+package pl.main.service.impl;
 
 import org.springframework.stereotype.Service;
-import pl.coderslab.entity.Role;
-import pl.coderslab.repository.InstitutionRepository;
-import pl.coderslab.repository.RoleRepository;
-import pl.coderslab.service.RoleService;
+import pl.main.entity.Role;
+import pl.main.repository.InstitutionRepository;
+import pl.main.repository.RoleRepository;
+import pl.main.service.RoleService;
 
 import java.util.List;
 

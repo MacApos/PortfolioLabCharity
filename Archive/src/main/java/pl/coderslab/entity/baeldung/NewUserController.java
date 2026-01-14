@@ -1,4 +1,4 @@
-package pl.coderslab.entity.baeldung;
+package pl.main.entity.baeldung;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

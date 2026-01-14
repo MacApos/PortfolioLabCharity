@@ -1,9 +1,9 @@
-package pl.coderslab.entity;
+package pl.main.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.coderslab.validator.*;
-import pl.coderslab.validator.groups.*;
+import pl.main.validator.*;
+import pl.main.validator.groups.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

@@ -1,12 +1,12 @@
-package pl.coderslab.repository;
+package pl.main.repository;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import pl.coderslab.entity.Deleted;
-import pl.coderslab.entity.Donation;
-import pl.coderslab.entity.User;
+import pl.main.entity.Deleted;
+import pl.main.entity.Donation;
+import pl.main.entity.User;
 
 import java.util.List;
 import java.util.Optional;

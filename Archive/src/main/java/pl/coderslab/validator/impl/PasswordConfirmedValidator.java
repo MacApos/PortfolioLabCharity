@@ -1,7 +1,7 @@
-package pl.coderslab.validator.impl;
+package pl.main.validator.impl;
 
-import pl.coderslab.entity.User;
-import pl.coderslab.validator.PasswordConfirmed;
+import pl.main.entity.User;
+import pl.main.validator.PasswordConfirmed;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

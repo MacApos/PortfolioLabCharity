@@ -1,4 +1,4 @@
-package pl.coderslab.controller;
+package pl.main.controller;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;

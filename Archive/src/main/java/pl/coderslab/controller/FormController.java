@@ -1,4 +1,4 @@
-package pl.coderslab.controller;
+package pl.main.controller;
 
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -6,14 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.entity.Category;
-import pl.coderslab.entity.CurrentUser;
-import pl.coderslab.entity.Donation;
-import pl.coderslab.entity.Institution;
-import pl.coderslab.service.CategoryService;
-import pl.coderslab.service.DonationService;
-import pl.coderslab.service.EmailService;
-import pl.coderslab.service.InstitutionService;
+import pl.main.entity.Category;
+import pl.main.entity.CurrentUser;
+import pl.main.entity.Donation;
+import pl.main.entity.Institution;
+import pl.main.service.CategoryService;
+import pl.main.service.DonationService;
+import pl.main.service.EmailService;
+import pl.main.service.InstitutionService;
 
 import javax.validation.Valid;
 import java.util.List;

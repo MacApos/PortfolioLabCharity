@@ -1,10 +1,10 @@
-package pl.coderslab.mapper;
+package pl.main.mapper;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import pl.coderslab.entity.User;
+import pl.main.entity.User;
 
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {

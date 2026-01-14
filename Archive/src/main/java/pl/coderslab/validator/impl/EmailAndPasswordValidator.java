@@ -1,9 +1,9 @@
-package pl.coderslab.validator.impl;
+package pl.main.validator.impl;
 
 import org.springframework.beans.BeanWrapperImpl;
-import pl.coderslab.entity.User;
-import pl.coderslab.service.UserService;
-import pl.coderslab.validator.EmailAndPassword;
+import pl.main.entity.User;
+import pl.main.service.UserService;
+import pl.main.validator.EmailAndPassword;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

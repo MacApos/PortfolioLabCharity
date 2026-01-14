@@ -1,6 +1,6 @@
-package pl.coderslab.validator;
+package pl.main.validator;
 
-import pl.coderslab.validator.impl.EmailAndPasswordValidator;
+import pl.main.validator.impl.EmailAndPasswordValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

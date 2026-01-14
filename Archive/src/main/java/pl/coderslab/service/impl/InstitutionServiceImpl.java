@@ -1,9 +1,9 @@
-package pl.coderslab.service.impl;
+package pl.main.service.impl;
 
 import org.springframework.stereotype.Service;
-import pl.coderslab.entity.Institution;
-import pl.coderslab.repository.InstitutionRepository;
-import pl.coderslab.service.InstitutionService;
+import pl.main.entity.Institution;
+import pl.main.repository.InstitutionRepository;
+import pl.main.service.InstitutionService;
 
 import java.util.List;
 

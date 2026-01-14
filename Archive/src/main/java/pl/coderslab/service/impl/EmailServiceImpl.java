@@ -1,4 +1,4 @@
-package pl.coderslab.service.impl;
+package pl.main.service.impl;
 
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.MailException;
@@ -6,7 +6,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import pl.coderslab.service.EmailService;
+import pl.main.service.EmailService;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;

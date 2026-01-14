@@ -1,4 +1,4 @@
-package pl.coderslab.controller;
+package pl.main.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -6,10 +6,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.coderslab.entity.User;
-import pl.coderslab.service.RoleService;
-import pl.coderslab.service.UserService;
-import pl.coderslab.validator.groups.Registration;
+import pl.main.entity.User;
+import pl.main.service.RoleService;
+import pl.main.service.UserService;
+import pl.main.validator.groups.Registration;
 
 import javax.servlet.http.HttpServletRequest;
 

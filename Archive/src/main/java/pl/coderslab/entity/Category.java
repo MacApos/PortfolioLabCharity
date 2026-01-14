@@ -1,4 +1,4 @@
-package pl.coderslab.entity;
+package pl.main.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package pl.coderslab.tags;
+package pl.main.tags;
 
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.tags.form.ErrorsTag;

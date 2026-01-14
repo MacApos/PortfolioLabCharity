@@ -1,4 +1,4 @@
-package pl.coderslab.validator.impl;
+package pl.main.validator.impl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

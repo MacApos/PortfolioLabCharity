@@ -1,6 +1,6 @@
-package pl.coderslab.service;
+package pl.main.service;
 
-import pl.coderslab.entity.Institution;
+import pl.main.entity.Institution;
 
 import java.util.List;
 

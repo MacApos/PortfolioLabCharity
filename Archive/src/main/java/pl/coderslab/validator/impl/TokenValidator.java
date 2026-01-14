@@ -1,10 +1,10 @@
-package pl.coderslab.validator.impl;
+package pl.main.validator.impl;
 
 import org.springframework.context.annotation.Bean;
-import pl.coderslab.entity.TokenAvailability;
-import pl.coderslab.entity.User;
-import pl.coderslab.service.UserService;
-import pl.coderslab.validator.Token;
+import pl.main.entity.TokenAvailability;
+import pl.main.entity.User;
+import pl.main.service.UserService;
+import pl.main.validator.Token;
 
 import javax.persistence.EnumType;
 import javax.validation.ConstraintValidator;

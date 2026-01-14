@@ -1,14 +1,14 @@
-package pl.coderslab.controller;
+package pl.main.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.coderslab.entity.CurrentUser;
-import pl.coderslab.entity.Institution;
-import pl.coderslab.service.DonationService;
-import pl.coderslab.service.InstitutionService;
+import pl.main.entity.CurrentUser;
+import pl.main.entity.Institution;
+import pl.main.service.DonationService;
+import pl.main.service.InstitutionService;
 
 import java.util.List;
 

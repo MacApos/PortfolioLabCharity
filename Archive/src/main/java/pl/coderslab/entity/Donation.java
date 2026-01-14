@@ -1,10 +1,10 @@
-package pl.coderslab.entity;
+package pl.main.entity;
 
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
-import pl.coderslab.validator.City;
-import pl.coderslab.validator.Street;
-import pl.coderslab.validator.ZipCode;
+import pl.main.validator.City;
+import pl.main.validator.Street;
+import pl.main.validator.ZipCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;

@@ -1,15 +1,15 @@
-package pl.coderslab.controller;
+package pl.main.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.entity.User;
-import pl.coderslab.service.UserService;
-import pl.coderslab.validator.groups.Authentication;
-import pl.coderslab.validator.groups.NewPassword;
-import pl.coderslab.validator.groups.PasswordReset;
+import pl.main.entity.User;
+import pl.main.service.UserService;
+import pl.main.validator.groups.Authentication;
+import pl.main.validator.groups.NewPassword;
+import pl.main.validator.groups.PasswordReset;
 
 import javax.servlet.http.HttpServletRequest;
 

@@ -1,10 +1,10 @@
-package pl.coderslab.service;
+package pl.main.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import pl.coderslab.entity.CurrentUser;
-import pl.coderslab.entity.User;
-import pl.coderslab.entity.UserAvailability;
+import pl.main.entity.CurrentUser;
+import pl.main.entity.User;
+import pl.main.entity.UserAvailability;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

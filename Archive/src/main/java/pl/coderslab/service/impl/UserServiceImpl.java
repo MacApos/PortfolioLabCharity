@@ -1,15 +1,15 @@
-package pl.coderslab.service.impl;
+package pl.main.service.impl;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import pl.coderslab.entity.*;
-import pl.coderslab.mapper.CustomerMapper;
-import pl.coderslab.repository.RoleRepository;
-import pl.coderslab.repository.UserRepository;
-import pl.coderslab.service.DonationService;
-import pl.coderslab.service.EmailService;
-import pl.coderslab.service.UserService;
+import pl.main.entity.*;
+import pl.main.mapper.CustomerMapper;
+import pl.main.repository.RoleRepository;
+import pl.main.repository.UserRepository;
+import pl.main.service.DonationService;
+import pl.main.service.EmailService;
+import pl.main.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;

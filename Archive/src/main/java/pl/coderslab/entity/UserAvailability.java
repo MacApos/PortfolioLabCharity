@@ -1,4 +1,4 @@
-package pl.coderslab.entity;
+package pl.main.entity;
 
 public enum UserAvailability {
     UNABLED,

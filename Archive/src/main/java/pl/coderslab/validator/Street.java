@@ -1,6 +1,6 @@
-package pl.coderslab.validator;
+package pl.main.validator;
 
-import pl.coderslab.validator.impl.StreetValidator;
+import pl.main.validator.impl.StreetValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

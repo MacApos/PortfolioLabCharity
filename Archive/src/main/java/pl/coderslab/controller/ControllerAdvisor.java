@@ -1,11 +1,11 @@
-package pl.coderslab.controller;
+package pl.main.controller;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import pl.coderslab.entity.CurrentUser;
-import pl.coderslab.entity.User;
-import pl.coderslab.service.UserService;
+import pl.main.entity.CurrentUser;
+import pl.main.entity.User;
+import pl.main.service.UserService;
 
 @ControllerAdvice
 public class ControllerAdvisor {

@@ -1,10 +1,10 @@
-package pl.coderslab.service.impl;
+package pl.main.service.impl;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import pl.coderslab.entity.*;
-import pl.coderslab.repository.DonationRepository;
-import pl.coderslab.service.DonationService;
+import pl.main.entity.*;
+import pl.main.repository.DonationRepository;
+import pl.main.service.DonationService;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
-package pl.coderslab.validator.impl;
+package pl.main.validator.impl;
 
-import pl.coderslab.validator.City;
+import pl.main.validator.City;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
